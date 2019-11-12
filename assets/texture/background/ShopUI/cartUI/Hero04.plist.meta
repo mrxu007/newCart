@@ -1,0 +1,34 @@
+{
+  "ver": "1.2.4",
+  "uuid": "19f899bb-e56b-4f83-b89e-1f6960c0ee4f",
+  "rawTextureUuid": "21ca6ebf-ab42-4814-880a-254f4645d28f",
+  "size": {
+    "width": 470,
+    "height": 395
+  },
+  "type": "Texture Packer",
+  "subMetas": {
+    "car04_6.png": {
+      "ver": "1.0.4",
+      "uuid": "0578b8f5-de71-49e6-abef-9c29a21f6bb2",
+      "rawTextureUuid": "21ca6ebf-ab42-4814-880a-254f4645d28f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 468,
+      "height": 393,
+      "rawWidth": 468,
+      "rawHeight": 393,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    }
+  }
+}

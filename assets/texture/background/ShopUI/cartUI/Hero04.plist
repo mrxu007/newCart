@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>car04_6.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{468,393}</string>
+                <key>spriteSourceSize</key>
+                <string>{468,393}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{468,393}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>Hero04.png</string>
+            <key>size</key>
+            <string>{470,395}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:2347b75f4b73ec30bbec8a33b75d8dfe:466a71a3e7e84c95e74d6d3867c115b9:dabb07e96b3c55a25617b4cd5ea49710$</string>
+            <key>textureFileName</key>
+            <string>Hero04.png</string>
+        </dict>
+    </dict>
+</plist>
