@@ -55,7 +55,8 @@ cc.Class({
     
     playAgain: function () {
         console.log('再来一次');
-        
+        // cc.director.resume();
+        // cc.director.stopAll();
         cc.audioEngine.playEffect(this.buttonAudio, false);
         cc.director.loadScene('RoomScene');
         
