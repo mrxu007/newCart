@@ -31,6 +31,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        gDataCtl = new data();
         gameCtl = this;
         this.MainViewAll.setPosition(0, 0);
         this.ShopBorder.active = false;
@@ -212,7 +213,7 @@ cc.Class({
         this.m_ClassArray = new Array();
         //创建对象池
         this.goldPool = new cc.NodePool();
-        gDataCtl = new data();
+        
     
     },
     tests: function (target, data) {

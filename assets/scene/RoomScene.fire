@@ -165,7 +165,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 472.8498704663035
+      "z": 458.9934640057525
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -4969,7 +4969,7 @@
       "__id__": 104
     },
     "_enabled": true,
-    "m_labelGOld": {
+    "m_labelGold": {
       "__id__": 106
     },
     "_id": "78/Rkl+G9J0K4RiHzHJozL"

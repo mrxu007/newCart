@@ -12,18 +12,18 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        m_labelGOld : cc.Label,
+        m_labelGold : cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.m_labelGOld.string = '' + tranNumber( gDataCtl.GetGold(),1);
+        this.m_labelGold.string = '' + tranNumber( gDataCtl.GetGold(),1);
         this.updateTopData();
     },
     updateTopData: function() {
       
-        this.m_labelGOld.string =  '' + tranNumber( gDataCtl.GetGold(),1);
+        this.m_labelGold.string =  '' + tranNumber( gDataCtl.GetGold(),1);
         
     },
 
