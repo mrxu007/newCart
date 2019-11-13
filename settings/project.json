@@ -6,20 +6,39 @@
     ],
     [
       false,
-      false,
+      true,
       null,
+      true,
       true
     ],
     [
       false,
       false,
       false,
+      true,
       true
     ],
     [
       false,
       true,
       true,
+      false,
+      true,
+      true
+    ],
+    [
+      false,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      false,
+      false,
+      false,
+      true,
+      false,
       false
     ]
   ],
@@ -42,7 +61,9 @@
     "default",
     "money",
     "goods",
-    "player"
+    "player",
+    "tree",
+    "stronger"
   ],
   "last-module-event-record-time": 0,
   "simulator-orientation": false,
