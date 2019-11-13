@@ -150,12 +150,13 @@ cc.Class({
     
     //进入游戏
     ChangeToGame: function () {
-
+        
         cc.director.loadScene("GameScene");
+        // cc.director.resumeAll();
     },
     //进入场景排行榜
     ChangeToLeaderBorder: function () {
-
+        
         cc.director.loadScene("LeaderBorder");
     },
     //动态化界面中的进入游戏按钮和选车图标
