@@ -5,12 +5,15 @@ cc.Class({
     properties: {
         m_progress: cc.ProgressBar,
         m_labGold: cc.Label,
+       
+                   
  
     },
     //按钮调用创建金币
     onClickGet:function(target,data) {
         // console.log("调用金币时坐标"+this.node.getPosition());
         // console.log("获取金币");
+     
         if(gDataCtl.getTaskGold() <= 0)return;
         gameCtl.createGoldAnim(
             this.node.getPosition(),

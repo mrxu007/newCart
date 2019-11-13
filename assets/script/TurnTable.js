@@ -12,6 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        
         // foo: {
         //     // ATTRIBUTES:
         //     default: null,        // The default value will be used only when the component attaching

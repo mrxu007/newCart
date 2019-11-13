@@ -27,6 +27,7 @@ cc.Class({
             type: cc.AudioClip,
         },
         strongerNum: cc.Label,
+        MainAction: cc.Node,
     },
     
 
@@ -92,6 +93,8 @@ cc.Class({
                 cc.audioEngine.stopAll();
                 cc.audioEngine.playEffect(this.collisionAudio, false);
                 cc.director.pause();
+                // this.MainAction.pauseAllActions();
+                // this.MainAction.Director.pause();
                 console.log ('撞到了');
                 //关闭触摸监听
                 //cc.find('Canvas/BaseView').getComponent('BackView').shutEvent();

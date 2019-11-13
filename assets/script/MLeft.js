@@ -12,6 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+      
 
     },
 
@@ -25,6 +26,13 @@ cc.Class({
     moveInBar: function() {
         this.node.runAction(cc.moveTo(0.5,cc.v3(0,0)).easing(cc.easeBackInOut()));
 
+    },
+    clickAudio: function(){
+        
+        // cc.audioEngine.playEffect( this.buttonAudio, false);
+        cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
+            var audioID = cc.audioEngine.play(clip, false);
+        });
     },
 
     start () {

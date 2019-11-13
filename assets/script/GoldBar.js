@@ -1,3 +1,4 @@
+ require('define');
 cc.Class({
     extends: cc.Component,
 
@@ -23,6 +24,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        
         this.m_labGold.string = '' + tranNumber( gDataCtl.GetGold(),1);
         
     },
