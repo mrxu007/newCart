@@ -14,6 +14,8 @@ cc.Class({
 
     properties: {
         
+        buttonAudio: cc.AudioClip,
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -23,7 +25,9 @@ cc.Class({
 
         cc.director.loadScene("RoomScene");
     },
-
+    clickAudio: function() {
+        cc.audioEngine.playEffect( this.buttonAudio, false);
+    },
     start () {
 
     },

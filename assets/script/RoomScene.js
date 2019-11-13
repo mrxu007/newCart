@@ -22,6 +22,8 @@ cc.Class({
         m_cartAll:[cc.Prefab],
         m_MainCartUI: [cc.SpriteAtlas],
         m_MainShowCart: cc.Sprite,
+        Audio:cc.AudioClip,
+        buttonAudio: cc.AudioClip,
         
         
 
@@ -31,11 +33,14 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        cc.audioEngine.playEffect(this.Audio, true);
+
         gDataCtl = new data();
         gameCtl = this;
         this.MainViewAll.setPosition(0, 0);
         this.ShopBorder.active = false;
         gDataCtl.load();
+        // cc.audioEngine.play(this.buttonAudio, true, 1.0 )
         // var HeroArray = [];
       
         
@@ -114,6 +119,8 @@ cc.Class({
     },
     //点击切换该选中特效
     touchEnd : function(event) {
+        cc.audioEngine.playEffect(this.buttonAudio, false);
+        
         // console.log(event);
         self = this
         // console.log(event.target.id);
@@ -152,12 +159,13 @@ cc.Class({
     ChangeToGame: function () {
         
         cc.director.loadScene("GameScene");
-        // cc.director.resumeAll();
+        // cc.director.resume();
     },
     //进入场景排行榜
     ChangeToLeaderBorder: function () {
         
         cc.director.loadScene("LeaderBorder");
+        cc.audioEngine.stopAll();
     },
     //动态化界面中的进入游戏按钮和选车图标
     // fadeOutOrIn: function (name) {

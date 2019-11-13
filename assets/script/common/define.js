@@ -1,14 +1,16 @@
+
+
 window.gameCtl = null;
 // 游戏所有的数据存放处
 window.gData = {};
 window.gDataCtl = null;
-is = false;
+ window.is = false;
 //全局随机数
-function randomNumber(lower,upper) {
+window.randomNumber = function (lower,upper) {
     return Math.floor(Math.random() * (upper - lower) + lower);
 }
 //全局排序（js距离算法）
-function distance(p1,p2) {
+window.distance = function distance(p1,p2) {
     var dx = Math.abs(p2.x - p1.x),
         dy = Math.abs(p2.y - p1.y);
         return Math.sqrt(Math.pow( dx , 2) + Math.pow( dy , 2));
@@ -19,7 +21,7 @@ function distance(p1,p2) {
  * @param 需要转化的数  num
  * @param 需要保留的小数 point
  */
-var tranNumber = function(num, point) {
+window.tranNumber = function(num, point) {
     let numStr = num.toString();
     // console.log(num + ':' +numStr +':' +numStr.length);
     //十万以内直接返回
