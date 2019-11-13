@@ -13,8 +13,8 @@ cc.Class({
 
 
     properties: {
+
         
-        buttonAudio: cc.AudioClip,
         
     },
 
@@ -24,9 +24,13 @@ cc.Class({
     ChangeToMain: function () {
 
         cc.director.loadScene("RoomScene");
+        // cc.audioEngine.resumeAll();
     },
     clickAudio: function() {
-        cc.audioEngine.playEffect( this.buttonAudio, false);
+         cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
+            var audioID = cc.audioEngine.play(clip, false);
+        });
+        
     },
     start () {
 

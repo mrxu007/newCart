@@ -12,7 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        buttonAudio: cc.AudioClip,
+      
 
     },
 
@@ -29,7 +29,10 @@ cc.Class({
     },
     clickAudio: function(){
         
-        cc.audioEngine.playEffect( this.buttonAudio, false);
+        // cc.audioEngine.playEffect( this.buttonAudio, false);
+        cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
+            var audioID = cc.audioEngine.play(clip, false);
+        });
     },
 
     start () {
