@@ -32,7 +32,7 @@ cc.Class({
         var str = cc.sys.localStorage.getItem('data');
             gData = JSON.parse(str); 
             if(gData == null) {
-                gData = {}
+                gData = {};
             }
             // console.log(gData);
             return gData;
