@@ -305,6 +305,9 @@ cc.Class({
                             cc.scaleTo(0.1,0.7,0.7),
                             cc.scaleTo(0.1,0.45,0.45),
                             cc.callFunc(function(){
+                                cc.loader.loadRes('assets/getmoney', cc.AudioClip, function (err, clip) {
+                                    var audioID = cc.audioEngine.play(clip, false);
+                                });
                                 notPlay = false;
                             }.bind(this))
                         )

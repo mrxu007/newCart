@@ -1,4 +1,4 @@
-
+require('define');
 cc.Class({
     extends: cc.Component,
 
@@ -13,7 +13,7 @@ cc.Class({
     onClickGet:function(target,data) {
         // console.log("调用金币时坐标"+this.node.getPosition());
         // console.log("获取金币");
-     
+        
         if(gDataCtl.getTaskGold() <= 0)return;
         gameCtl.createGoldAnim(
             this.node.getPosition(),
