@@ -22,7 +22,7 @@ cc.Class({
         m_cartAll:[cc.Prefab],
         m_MainCartUI: [cc.SpriteAtlas],
         m_MainShowCart: cc.Sprite,
-    
+        m_topMenu: cc.Node,
        
         
         
@@ -209,17 +209,20 @@ cc.Class({
         // console.log("触发了转向"+data);
         this.MainViewAll.active = false;
         // this.fadeOutOrIn(data);
-        this.shopGold.updateTopData();
+        
+        var update = this.shopGold.getComponent('shopGoldBar');
+            update.updateTopData();
         this.ShopBorder.active = true;
 
 
     },
-    //切换ShopBorder和游戏主界面
+    //切换openMainView和游戏主界面
     openMainView: function (event, data) {
         // console.log("触发什么都没传"+data);   
         this.MainViewAll.active = true;
         // this.fadeOutOrIn(data);
-        gameCtl.GoldBar.updateTopData();
+        var update = this.m_topMenu.getComponent('GoldBar');
+            update.updateTopData();
         
         this.ShopBorder.active = false;
 

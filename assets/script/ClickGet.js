@@ -1,10 +1,10 @@
-require('define');
 cc.Class({
     extends: cc.Component,
 
     properties: {
         m_progress: cc.ProgressBar,
         m_labGold: cc.Label,
+        m_topMenu: cc.Node,
        
                    
  
@@ -24,7 +24,8 @@ cc.Class({
             function(gold) {
                 gDataCtl.AddGold(gold);
                 // console.log(gold);
-                gameCtl.GoldBar.updateTopData();
+                var update = this.m_topMenu.getComponent('GoldBar');
+                    update.updateTopData();
             }.bind(this)
             );
             gDataCtl.ClearTaskGold();

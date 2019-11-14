@@ -142,18 +142,18 @@ cc.Class({
     //
     //总生成
     spawnFunc: function () {
-        var dat = Math.floor(Math.random() * 2);
+       var dat = Math.floor(Math.random() * 2);
         console.log('ababa');
         switch (dat) {
 
             //树
             case 0:
-                console.log('00000');
+                // console.log('00000');
                 this.spawnNewTree();
                 break;
             //石头
             case 1:
-                console.log('11111');
+                // console.log('11111');
                 this.spawnNewStone();
                 break;
             //金币
@@ -220,7 +220,7 @@ cc.Class({
         this.schedule(function () {
             this.spawnFunc();
             console.log('this.spawnFunc()');
-        }, 10, 4);
+        }, 7, 4);
 
         // this.schedule(function () {
         //     this.spawnNewStronger();

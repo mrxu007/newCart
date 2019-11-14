@@ -1,12 +1,4 @@
-// Learn cc.Class:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
+require('BackVIewData');
 
 cc.Class({
     extends: cc.Component,
@@ -49,11 +41,7 @@ cc.Class({
      
         this.registerEvent();
         this.moveBackGround();
-        // setInterval(() => {
-        //     this.createMoney();
-            
-        // },2000);
-        //  初始化背景图标1位置
+     
         
     },
 
@@ -68,10 +56,7 @@ cc.Class({
         // this.Touch_view.on(cc.Node.EventType.TOUCH_END, throttle(this.touchEnd, 200), this);
         this.Touch_view.on(cc.Node.EventType.TOUCH_END,this.touchEnd, this);
         
-        //初始背景滚动2
-        // var moveBack2 = cc.moveTo(6, cc.v3(0, -2200));
-        // var seq = cc.sequence(moveBack2, cc.callFunc(this.moveRepeat, this));
-        // this.M_Back1[1].runAction(seq);
+     
     },
     //背景初始化滚动
     moveBackGround: function(){
@@ -87,17 +72,7 @@ cc.Class({
             this.M_Back1[i].runAction(seq);
             
         }
-        //控制树
-        //   for (let i = 0; i < this.M_Back2.length; i++) {
-        //     let height = this.M_Back2[i].height;
-            
-        //     this.M_Back2[i].setPosition(0,i*(height-58));
-        //      //初始背景滚动1
-        //     var moveBack2 = cc.moveTo(i*tree+tree, cc.v3(0, -(height-58)));
-        //     var seq = cc.sequence(moveBack2, cc.callFunc(this.moveRepeat, this,tree));
-        //     this.M_Back2[i].runAction(seq);
-            
-        // }
+    
 
     },
     //背景重复滚动
@@ -113,8 +88,8 @@ cc.Class({
     touchStart: function (event) {
         // console.log("触摸开始");
         let worldPoint = event.getLocation();
-        this.touchStartX = worldPoint.x;
-        this.touchStartY = worldPoint.y;
+        touchStartX = worldPoint.x;
+        touchStartY = worldPoint.y;
         // console.log("触摸开始",this.touchStartX);
     },
     touchMove: function (event) {
@@ -138,7 +113,7 @@ cc.Class({
         // console.log("触摸结束节点内离开了屏幕");
         let touchEndPoint = event.getLocation();
         // console.log("离开屏幕",touchEndPoint.x);
-        let endX = this.touchStartX - touchEndPoint.x;
+        let endX = touchStartX - touchEndPoint.x;
         //判定方向
         if (endX > 0) {
             // console.log("判定向左");
@@ -183,29 +158,6 @@ cc.Class({
       
 
     },
-      //生成money、
-    //   createMoney: function(){
-    //     let Money = cc.instantiate(this.Money);
-    //     Money.parent = this.node;
-    //     Money.x =   -350+Math.random()*400 ;
-    //     console.log(Money.x);
-    //     //起点
-    //     Money.y = 800;
-    //     // Money.x = 0;
-
-    // },
-
-
-
-
-
-
-
-
-
-
-
-
     // start() {},
 
     update (dt) {
