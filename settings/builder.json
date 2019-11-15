@@ -39,8 +39,8 @@
   "title": "newCart",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
-    "appid": "",
+    "REMOTE_SERVER_ROOT": "https://blog.jsone.xyz/testCart",
+    "appid": "wx3e868572050f0d77",
     "orientation": "portrait",
     "separate_engine": false,
     "subContext": ""
