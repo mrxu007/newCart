@@ -58,7 +58,7 @@ cc.Class({
 
        
         //拿到商城背景被选中的预制体
-        for (let i = 0; i < this.m_HeroData.length; i++) { 
+        for (var i = 0; i < this.m_HeroData.length; i++) { 
             var  hero = cc.instantiate(this.m_norHeroPrefab);
             this.m_ScrollContent.addChild(hero);
             var Prefab = hero.getComponent('SelHeroPrefab');
@@ -82,7 +82,7 @@ cc.Class({
             var frame =  this.m_shopBackUI.getSpriteFrame('checked');
             childrenArr[0].getComponent(cc.Sprite).spriteFrame = frame;
 
-        // for (let i = 0; i < HeroArray.length; i++) {
+        // for (var i = 0; i < HeroArray.length; i++) {
         //     HeroArray[i].
         // }
         //点击事件
@@ -90,7 +90,7 @@ cc.Class({
         
         //拿到初始图标的位置
         // this.btStartPos = [];
-        // for (let i = 0; i < this.R_btn_action.length; i++) {
+        // for (var i = 0; i < this.R_btn_action.length; i++) {
         //     this.btStartPos[i] = this.R_btn_action[i].getPosition();
         //     // console.log(position);    
 
@@ -178,7 +178,7 @@ cc.Class({
     //     var isPlay = false;
     //     console.log("初始化" + isPlay);
     //     if (!isPlay) {
-    //         for (let i = 0; i < this.R_btn_action.length; i++) {
+    //         for (var i = 0; i < this.R_btn_action.length; i++) {
     //             var timer = cc.delayTime(0.5 * i);
     //             var moveTo;
     //             if (name == 'shop') {
@@ -246,7 +246,7 @@ cc.Class({
 
         }
         else if (data == "移出") {
-            for (let i = 0; i < this.m_ClassArray.length; i++) {
+            for (var i = 0; i < this.m_ClassArray.length; i++) {
                 var cls = this.m_ClassArray[i];
                 if (cls.moveOutBar != null) {
                     cls.moveOutBar();
@@ -254,7 +254,7 @@ cc.Class({
             }
 
         } else if (data == "移入") {
-            for (let i = 0; i < this.m_ClassArray.length; i++) {
+            for (var i = 0; i < this.m_ClassArray.length; i++) {
                 var cls = this.m_ClassArray[i];
                 if (cls.moveInBar != null) {
                     cls.moveInBar();
@@ -275,7 +275,7 @@ cc.Class({
     createGoldAnim: function (srcPos, dstPos, radius, goldCount,addGold,callback) {
         var array = this.getPoint(radius, srcPos.x, srcPos.y, goldCount);
         var nodeArray = new Array();
-        for (let i = 0; i < array.length; i++) {
+        for (var i = 0; i < array.length; i++) {
             var gold = this.createGold(this.node);
             var randPos = cc.v3(array[i].x + randomNumber(0, 50), array[i].y + randomNumber(0, 50));
             gold.setPosition(srcPos);
@@ -291,7 +291,7 @@ cc.Class({
             return disa - disb;
         });
         var notPlay = false;
-        for (let i = 0; i < nodeArray.length; i++) {
+        for (var i = 0; i < nodeArray.length; i++) {
             var pos = nodeArray[i].randPos;
             var node = nodeArray[i].gold;
             nodeArray[i].gold.id = i;
@@ -334,7 +334,7 @@ cc.Class({
     },
     //创建金币池
     createGold: function (parentNode) {
-        let gold = null;
+        var gold = null;
         if (this.goldPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             // console.log("已从金币对象池调用金币");
             gold = this.goldPool.get();

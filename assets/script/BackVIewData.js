@@ -9,7 +9,7 @@ window.tree = 4;
 //节流throttle代码
 window.throttle = function (func, delay) {
 
-    let timeout;
+    var timeout;
     return function (event) {
         clearTimeout(timeout);
         timeout = setTimeout(() => {

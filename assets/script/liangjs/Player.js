@@ -47,7 +47,7 @@ cc.Class({
     onSkill: function () {
         cc.audioEngine.playEffect(this.buttonAudio, false);
         if (this.skill > 0) {
-            console.log('技能开启');
+            // console.log('技能开启');
             this.skill -= 1;
             // this.schedule(() => {
             //     this.openSkill = true;
@@ -57,7 +57,7 @@ cc.Class({
             this.scheduleOnce(() => {
                 this.openSkill = false;
                 this.node.setScale(4, 4);
-                console.log('技能结束');
+                // console.log('技能结束');
             }, 3);
             this.strongerNum.string = this.skill;
         }
@@ -86,18 +86,13 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        console.log('检测到');
         if(this.openSkill == false){
             if (other.node.group == 'goods' || other.node.group == 'tree') {
                 this.skill = 0;
                 cc.audioEngine.stopAll();
                 cc.audioEngine.playEffect(this.collisionAudio, false);
                 cc.director.pause();
-                // this.MainAction.pauseAllActions();
-                // this.MainAction.Director.pause();
-                console.log ('撞到了');
-                //关闭触摸监听
-                //cc.find('Canvas/BaseView').getComponent('BackView').shutEvent();
+           
                 this.Road.getComponent('Control').gameOver();
                 
                 cc.find('Canvas/BaseView/BG1/Back/Road').getComponent('Control').spawnFunc();
@@ -149,7 +144,7 @@ cc.Class({
     },
 
     
-    update (dt) {
-        console.log(this.skill);
-    },
+    // update (dt) {
+        
+    // },
 });

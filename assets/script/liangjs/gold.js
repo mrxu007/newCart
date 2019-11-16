@@ -40,7 +40,7 @@ cc.Class({
         if (other.node.group == 'player') {
             //调用收金币行为
             this.onPicked();
-        } else if(other.node.group == 'goods' || other.node.group == 'money' || ther.node.group == 'tree') {
+        } else if(other.node.group == 'goods' || other.node.group == 'money' || other.node.group == 'tree') {
             cc.find('Canvas/BaseView/BG1/Back/Road').getComponent('Control').goldPool.put(this.node);
             //this.game.spawnFunc();  
             cc.find('Canvas/BaseView/BG1/Back/Road').getComponent('Control').spawnNewGold();

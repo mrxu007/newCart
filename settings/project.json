@@ -42,7 +42,7 @@
       false
     ]
   ],
-  "design-resolution-height": 2208,
+  "design-resolution-height": 1800,
   "design-resolution-width": 1242,
   "excluded-modules": [
     "ParticleSystem",
@@ -68,7 +68,7 @@
     }
   },
   "fit-height": true,
-  "fit-width": false,
+  "fit-width": true,
   "group-list": [
     "default",
     "money",

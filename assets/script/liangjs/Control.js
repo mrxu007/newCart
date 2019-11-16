@@ -71,7 +71,7 @@ cc.Class({
         // newSpawnStone.getComponent('Goods').game = this;
         // newSpawnStone.setPosition(this.positionFunc());
 
-        let stone = null;
+        var stone = null;
         if (this.stonePool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             stone = this.stonePool.get();
         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
@@ -92,7 +92,7 @@ cc.Class({
         // newSpawnGold.setPosition(this.positionFunc());
 
 
-        let tree = null;
+        var tree = null;
         if (this.treePool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             tree = this.treePool.get();
         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
@@ -110,7 +110,7 @@ cc.Class({
         // newSpawnTree.getComponent('trees').game = this;
         // newSpawnTree.setPosition(this.positionFunc());
 
-        let gold = null;
+        var gold = null;
         if (this.goldPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             gold = this.goldPool.get();
         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
@@ -122,10 +122,10 @@ cc.Class({
 
     //生成技能方法
     spawnNewStronger: function (){
-        let stronger = null;
+        var stronger = null;
         if (this.strongerPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             stronger = this.strongerPool.get();
-            console.log(this.strongerPool.size());
+           
         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
             stronger = cc.instantiate(this.strongerPrefab);
             
@@ -143,17 +143,17 @@ cc.Class({
     //总生成
     spawnFunc: function () {
        var dat = Math.floor(Math.random() * 2);
-        console.log('ababa');
+        
         switch (dat) {
 
             //树
             case 0:
-                // console.log('00000');
+              
                 this.spawnNewTree();
                 break;
             //石头
             case 1:
-                // console.log('11111');
+               
                 this.spawnNewStone();
                 break;
             //金币
@@ -165,7 +165,7 @@ cc.Class({
     positionFunc: function () {
         var goldX = Math.floor(Math.random() * 3 - 1) * 300;
         var goldY = Math.random() * 300 + 2200;
-        console.log(goldY);
+ 
         return cc.v2(goldX, goldY);
     },
 
@@ -174,35 +174,35 @@ cc.Class({
 
     onLoad() {
         //cc.game.setFrameRate(90);
-        console.log(cc.find('Canvas/BaseView/BG1/Back/Road'));
+        
         this.alert.active = false;
         cc.audioEngine.playEffect(this.playAudio, true);
         //建立石头对象池
         this.stonePool = new cc.NodePool();
-        let initCountS = 6;
-        for (let i = 0; i < initCountS; ++i) {
-            let stone = cc.instantiate(this.stonePrefab); // 创建节点
+        var initCountS = 6;
+        for (var i = 0; i < initCountS; ++i) {
+            var stone = cc.instantiate(this.stonePrefab); // 创建节点
             this.stonePool.put(stone); // 通过 put 接口放入对象池
         }
         //建立树对象池
         this.treePool = new cc.NodePool();
-        let initCountT = 6;
-        for (let i = 0; i < initCountT; ++i) {
-            let tree = cc.instantiate(this.treePrefab); // 创建节点
+        var initCountT = 6;
+        for (var i = 0; i < initCountT; ++i) {
+            var tree = cc.instantiate(this.treePrefab); // 创建节点
             this.treePool.put(tree); // 通过 put 接口放入对象池
         }
         //建立金币对象池
         this.goldPool = new cc.NodePool();
-        let initCountG = 6;
-        for (let i = 0; i < initCountG; ++i) {
-            let gold = cc.instantiate(this.goldPrefab); // 创建节点
+        var initCountG = 6;
+        for (var i = 0; i < initCountG; ++i) {
+            var gold = cc.instantiate(this.goldPrefab); // 创建节点
             this.goldPool.put(gold); // 通过 put 接口放入对象池
         }
         //建立技能对象池
         this.strongerPool = new cc.NodePool();
-        let initCountSkill = 3;
-        for (let i = 0; i < initCountSkill; ++i) {
-            let stronger = cc.instantiate(this.strongerPrefab); // 创建节点
+        var initCountSkill = 3;
+        for (var i = 0; i < initCountSkill; ++i) {
+            var stronger = cc.instantiate(this.strongerPrefab); // 创建节点
             this.strongerPool.put(stronger); // 通过 put 接口放入对象池
         }
         
@@ -219,13 +219,10 @@ cc.Class({
 
         this.schedule(function () {
             this.spawnFunc();
-            console.log('this.spawnFunc()');
+          
         }, 7, 4);
 
-        // this.schedule(function () {
-        //     this.spawnNewStronger();
-        //     console.log('this.spawnNewStronger()');
-        // }, 9, 5);
+   
 
         this.schedule(function () {
             this.spawnNewStronger();

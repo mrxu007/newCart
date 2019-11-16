@@ -22,19 +22,19 @@ window.distance = function distance(p1,p2) {
  * @param 需要保留的小数 point
  */
 window.tranNumber = function(num, point) {
-    let numStr = num.toString();
+    var numStr = num.toString();
     // console.log(num + ':' +numStr +':' +numStr.length);
     //十万以内直接返回
     if(numStr.length < 6) {
         return numStr;
     }else if(numStr.length > 8){
         //大于8位数为亿
-        let decimal = numStr.substring(numStr.length - 8, numStr.length - 8 + point);
+        var decimal = numStr.substring(numStr.length - 8, numStr.length - 8 + point);
         return parseFloat(parseInt(num / 100000000) + '.' + decimal) + '亿';
 
     }else if(numStr.length > 5){
         //大于6位数返回十万
-        let decimal = numStr.substring(numStr.length - 4  ,numStr.length -4 + point)
+        var decimal = numStr.substring(numStr.length - 4  ,numStr.length -4 + point)
         return parseFloat(parseInt(num / 10000) + '.' + decimal) + '万';
     }
     

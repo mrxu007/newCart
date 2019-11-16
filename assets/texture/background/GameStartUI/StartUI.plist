@@ -11,11 +11,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{1242,2208}</string>
+                <string>{720,1280}</string>
                 <key>spriteSourceSize</key>
-                <string>{1242,2208}</string>
+                <string>{720,1280}</string>
                 <key>textureRect</key>
-                <string>{{0,0},{1242,2208}}</string>
+                <string>{{0,0},{720,1280}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -26,11 +26,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{841,320}</string>
+                <string>{421,159}</string>
                 <key>spriteSourceSize</key>
-                <string>{841,320}</string>
+                <string>{421,159}</string>
                 <key>textureRect</key>
-                <string>{{0,2208},{841,320}}</string>
+                <string>{{0,1285},{421,159}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -41,11 +41,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{668,187}</string>
+                <string>{334,94}</string>
                 <key>spriteSourceSize</key>
-                <string>{668,187}</string>
+                <string>{334,94}</string>
                 <key>textureRect</key>
-                <string>{{841,2208},{668,187}}</string>
+                <string>{{426,1285},{334,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -61,9 +61,9 @@
             <key>realTextureFileName</key>
             <string>StartUI.png</string>
             <key>size</key>
-            <string>{1509,2528}</string>
+            <string>{760,1444}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6383c5a5553e6f8e33a1597433070ad5:0db6503e31e815fa731159bf7556f00d:7f77cbfb268dffe0d99a551532bb0396$</string>
+            <string>$TexturePacker:SmartUpdate:5efe0721625b6efa876e5ab8baeec4eb:7a70b832c3bdbe2d232ebd21e3f003ad:7f77cbfb268dffe0d99a551532bb0396$</string>
             <key>textureFileName</key>
             <string>StartUI.png</string>
         </dict>
