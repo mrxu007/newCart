@@ -163,7 +163,7 @@ cc.Class({
     },
 
     positionFunc: function () {
-        var goldX = Math.floor(Math.random() * 3 - 1) * 300;
+        var goldX = Math.floor(Math.random() * 3 - 1) * 180;
         var goldY = Math.random() * 300 + 2200;
  
         return cc.v2(goldX, goldY);

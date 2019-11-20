@@ -53,12 +53,13 @@ cc.Class({
             //     this.openSkill = true;
             // }, 3);
             this.openSkill = true;
-            this.node.setScale(5, 5);
+            this.node.setScale(4, 4);
             this.scheduleOnce(() => {
                 this.openSkill = false;
-                this.node.setScale(4, 4);
+                this.node.setScale(2, 2);
                 // console.log('技能结束');
             }, 3);
+            //console.log(this.skill);
             this.strongerNum.string = this.skill;
         }
         
@@ -92,11 +93,14 @@ cc.Class({
                 cc.audioEngine.stopAll();
                 cc.audioEngine.playEffect(this.collisionAudio, false);
                 cc.director.pause();
+                
+                // this.getComponent('cc.Animation').play();
+                // this.node.destroy();
            
                 this.Road.getComponent('Control').gameOver();
                 
                 cc.find('Canvas/BaseView/BG1/Back/Road').getComponent('Control').spawnFunc();
-                this.strongerNum.string = 'x' + this.strongerNum;
+                this.strongerNum.string = 0;
             
             
             } else if(other.node.group == 'stronger') {

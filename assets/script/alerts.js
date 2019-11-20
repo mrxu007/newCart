@@ -43,21 +43,23 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        
-        this.coinNum.string = cc.sys.localStorage.getItem("coinNum");
+        this.node.zIndex = 100;
+        var gameGold = cc.sys.localStorage.getItem("coinNum");
+        this.coinNum.string = gameGold ;
+        gDataCtl.AddGold(gameGold);
+
+
     },
 
     friendHelp: function () {
-        console.log('好友助力');
         cc.audioEngine.playEffect(this.buttonAudio, false);
         
     },
     
     playAgain: function () {
-        console.log('再来一次');
-        cc.director.resume();
+        //cc.director.resume();
         cc.audioEngine.playEffect(this.buttonAudio, false);
-        cc.director.loadScene('RoomScene');
+        cc.director.loadScene('RoomScene2');
         
     },
 

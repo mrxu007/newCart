@@ -59,9 +59,9 @@ cc.Class({
         for (var i = 0; i < this.M_Back1.length; i++) {
             var height = this.M_Back1[i].height;
             // console.log(height);
-            this.M_Back1[i].setPosition(0,i*(height));
+            this.M_Back1[i].setPosition(0,i*(height-58));
              //初始背景滚动1
-            var moveBack1 = cc.moveTo(i*road+road, cc.v3(0, -(height)));
+            var moveBack1 = cc.moveTo(i*road+road, cc.v3(0, -(height-58)));
             var seq = cc.sequence(moveBack1, cc.callFunc(this.moveRepeat, this, road));
             this.M_Back1[i].runAction(seq);
             
@@ -72,10 +72,10 @@ cc.Class({
     //背景重复滚动
     moveRepeat: function (target,road) {
         var height = target.height;
-        target.setPosition(0,(height));
-        var moveBack1 = cc.moveTo(road *2, cc.v3(0, -(height)));
-        var seq = cc.sequence(moveBack1, cc.callFunc(this.moveRepeat, this , road ));
-        console.log('重复完毕');
+        target.setPosition(0,(height-58));
+        var moveBack1 = cc.moveTo(road *2, cc.v3(0, -(height-58)));
+        var seq = cc.sequence(moveBack1, cc.callFunc(this.moveRepeat, this ,road ));
+        // console.log('重复完毕');
         target.runAction(seq);
 
     },
@@ -103,8 +103,8 @@ cc.Class({
         var cart = this.cart.getPosition();
         var cartX = cart.x;
         // console.log(cartX);
-        var vector1 = cartX - 280;
-        var vector2 = cartX + 280;
+        var vector1 = cartX - 186;
+        var vector2 = cartX + 186;
         // console.log("触摸结束节点内离开了屏幕");
         var touchEndPoint = event.getLocation();
         // console.log("离开屏幕",touchEndPoint.x);
@@ -113,14 +113,14 @@ cc.Class({
         if (endX > 0) {
             // console.log("判定向左");
             // console.log(endX);
-            if (vector1 <= -300) {
-                vector1 = -300;
+            if (vector1 <= -186) {
+                vector1 = -186;
             }
             this.moveChange('left', vector1);
 
         } else if (endX < 0) {
-            if (vector2 >= 270) {
-                vector2 = 270;
+            if (vector2 >= 186) {
+                vector2 = 186;
             }
             // console.log("判定向右");
             // console.log(endX);
@@ -140,13 +140,13 @@ cc.Class({
         if (direction == 'left') {
             this.node.stopAllActions();
             
-            var moveLeft = cc.moveTo(0.2, cc.v3(vector, -592.495));
+            var moveLeft = cc.moveTo(0.2, cc.v3(vector, -339.762));
 
             this.cart.runAction(moveLeft);
 
         } else {
             this.node.stopAllActions();
-            var moveRight = cc.moveTo(0.2, cc.v3(vector, -592.495));
+            var moveRight = cc.moveTo(0.2, cc.v3(vector, -339.762));
 
             this.cart.runAction(moveRight);
         }

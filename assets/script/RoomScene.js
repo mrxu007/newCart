@@ -59,7 +59,9 @@ cc.Class({
        
         //拿到商城背景被选中的预制体
         for (var i = 0; i < this.m_HeroData.length; i++) { 
+            // console.log(this.m_HeroData.length);
             var  hero = cc.instantiate(this.m_norHeroPrefab);
+            // console.log(hero);
             this.m_ScrollContent.addChild(hero);
             var Prefab = hero.getComponent('SelHeroPrefab');
                 Prefab.setStyle(this.m_HeroData[i]);
@@ -72,7 +74,7 @@ cc.Class({
             // HeroArray[i].isChecked = false;
             // console.log(hero.id);
             // console.log(hero.isChecked);
-            
+           
             
         }  
         //初始化默认第一个被选中
@@ -117,7 +119,7 @@ cc.Class({
         this.shopGold = this.shopGold.getComponent('shopGoldBar');
         
         
-
+        cc.director.resume();
 
     },
     //点击切换该选中特效
@@ -140,6 +142,7 @@ cc.Class({
                 var cartArry = ['car01_1','car02_2','car03_1','car04_6','car05_1'];
                 item.isChecked = true;
                 var frame =  this.m_shopBackUI.getSpriteFrame('checked');
+                // console.log(item.id);
                 // console.log('您选择了这辆车哦');
                 childrenArr[item.id].getComponent(cc.Sprite).spriteFrame = frame;
                 var sprite = this. m_MainCartUI[item.id].getSpriteFrame(cartArry[item.id]);
@@ -163,7 +166,7 @@ cc.Class({
     //进入游戏
     ChangeToGame: function () {
         
-        cc.director.loadScene("GameScene");
+        cc.director.loadScene("GameScene2");
         // cc.director.resume();
         cc.audioEngine.pauseAll();
     },
@@ -173,37 +176,6 @@ cc.Class({
         cc.director.loadScene("LeaderBorder");
         cc.audioEngine.pauseAll();
     },
-    //动态化界面中的进入游戏按钮和选车图标
-    // fadeOutOrIn: function (name) {
-    //     var isPlay = false;
-    //     console.log("初始化" + isPlay);
-    //     if (!isPlay) {
-    //         for (var i = 0; i < this.R_btn_action.length; i++) {
-    //             var timer = cc.delayTime(0.5 * i);
-    //             var moveTo;
-    //             if (name == 'shop') {
-    //                 // console.log("出发了ShopBorder");
-    //                 moveTo = cc.moveTo(0.3, cc.v3(1136, this.btStartPos[i].y));
-    //             } else {
-
-    //                 moveTo = cc.moveTo(0.3, cc.v3(this.btStartPos[i]).x, this.btStartPos[i].y);
-    //                 // console.log("出发了MainView");
-    //             }
-
-    //             isPlay = true;
-    //             console.log("进入判断" + isPlay);
-    //             var seq = cc.sequence(
-    //                 timer,
-    //                 moveTo,
-    //                 cc.callFunc(function () {
-    //                     isPlay = false;
-    //                     console.log("进入回调" + isPlay);
-    //                 }),
-    //             );
-    //             this.R_btn_action[i].runAction(seq);
-    //         }
-    //     }
-    // },
     //切换ShopBorder和游戏主界面
     openShopBorder: function (event, data) {
         // console.log("触发了转向"+data);
@@ -305,8 +277,8 @@ cc.Class({
                     if(!notPlay){
                         notPlay = true;
                         var seq2 = cc.sequence(
-                            cc.scaleTo(0.1,0.7,0.7),
-                            cc.scaleTo(0.1,0.45,0.45),
+                            cc.scaleTo(0.1,0.8,0.8),
+                            cc.scaleTo(0.1,0.65,0.65),
                             cc.callFunc(function(){
                                 cc.loader.loadRes('assets/getmoney', cc.AudioClip, function (err, clip) {
                                     var audioID = cc.audioEngine.play(clip, false);

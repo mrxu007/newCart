@@ -35,7 +35,7 @@ cc.Class({
         
     },
     openToRoom: function () {     
-        cc.director.loadScene("RoomScene");
+        cc.director.loadScene("RoomScene2");
     },
 
     start () {

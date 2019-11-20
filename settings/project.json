@@ -42,8 +42,8 @@
       false
     ]
   ],
-  "design-resolution-height": 1800,
-  "design-resolution-width": 1242,
+  "design-resolution-height": 1280,
+  "design-resolution-width": 720,
   "excluded-modules": [
     "ParticleSystem",
     "TiledMap",

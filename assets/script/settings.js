@@ -31,24 +31,25 @@ cc.Class({
     Play() {
 
     },
-    moveOutBar: function() {
-        this.node.runAction(cc.moveTo(0.5,cc.v3(-669.748,-12.144)).easing(cc.easeBackInOut()));
-    },
-    moveInBar: function() {
-        this.node.runAction(cc.moveTo(0.5,cc.v3(-578.19,-12.144)).easing(cc.easeBackInOut()));
+    // moveOutBar: function() {
+    //     // console.log(this.node.getPosition());
+    //     this.node.runAction(cc.moveTo(0.5,cc.v3(54.956,428.802)).easing(cc.easeBackInOut()));
+    // },
+    // moveInBar: function() {
+    //     this.node.runAction(cc.moveTo(0.5,cc.v3(-45.044,-284.378)).easing(cc.easeBackInOut()));
 
-    },
+    // },
     //滑动切换
     toggleMeue: function() {
         
             if(!is){
                 is = true;
-                var moveTo = cc.moveTo(0.5,cc.v3(235.684,774.871));
+                var moveTo = cc.moveTo(0.5,cc.v3(144.22,428.802));
                 this.m_setting.runAction(moveTo);
                 
             }else{
                 is = false;
-                var moveTo = cc.moveTo(0.5,cc.v3(83.451,774.871));
+                var moveTo = cc.moveTo(0.5,cc.v3(42.563,428.802));
                 this.m_setting.runAction(moveTo);
                 
                 
