@@ -87,9 +87,6 @@ cc.Class({
         touchStartY = worldPoint.y;
         // console.log("触摸开始",this.touchStartX);
     },
-    touchMove: function (event) {
-        // console.log("触发移动");
-    },
     // //节点外触发
     // touchCancel: function (event) {
 
@@ -113,7 +110,7 @@ cc.Class({
         if (endX > 0) {
             // console.log("判定向左");
             // console.log(endX);
-            if (vector1 <= -186) {
+            if (vector1 <= -195) {
                 vector1 = -186;
             }
             this.moveChange('left', vector1);
@@ -136,22 +133,38 @@ cc.Class({
     },
     //左右控制
     moveChange(direction, vector) {
-
+        var notMove = false;
         if (direction == 'left') {
-            this.node.stopAllActions();
             
-            var moveLeft = cc.moveTo(0.2, cc.v3(vector, -339.762));
 
-            this.cart.runAction(moveLeft);
-
+                if(!notMove){
+                    notMove = true;
+                    this.cart.stopAllActions();
+                    // console.log(notMove);
+                    var seqLeft = cc.sequence(
+                        cc.moveTo(0.1, cc.v3(vector, -339.762)),
+                        cc.callFunc(function(){
+                            notMove = false;
+                            // console.log(notMove)
+                        }.bind(this)),
+                    );                       
+                    this.cart.runAction(seqLeft);
+                }
         } else {
-            this.node.stopAllActions();
-            var moveRight = cc.moveTo(0.2, cc.v3(vector, -339.762));
-
-            this.cart.runAction(moveRight);
+            
+            if(!notMove){
+                notMove = true;
+                this.cart.stopAllActions();
+                var seqRight = cc.sequence(
+                    cc.moveTo(0.1, cc.v3(vector, -339.762)),
+                    cc.callFunc(function(){
+                        
+                        notMove = false;
+                    }.bind(this)),
+                );                        
+                this.cart.runAction(seqRight);
+            }
         }
-      
-
     },
     // start() {},
 
