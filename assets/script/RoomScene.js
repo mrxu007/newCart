@@ -19,13 +19,16 @@ cc.Class({
         m_ScrollContent: cc.Node,
         m_norHeroPrefab: cc.Prefab,
         m_shopBackUI: cc.SpriteAtlas,
-        m_cartAll:[cc.Prefab],
+        m_cartAll: [cc.Prefab],
         m_MainCartUI: [cc.SpriteAtlas],
         m_MainShowCart: cc.Sprite,
         m_topMenu: cc.Node,
-       
-        
-        
+        m_RoomSceneUI1: cc.SpriteAtlas,
+        m_voice: cc.Sprite, //左侧声音开关按钮
+        m_Information: cc.Node, //车辆购买弹窗
+
+
+
 
 
     },
@@ -33,70 +36,20 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        
-        cc.loader.loadRes('assets/Main', cc.AudioClip, function (err, clip) {
-            var audioID = cc.audioEngine.play(clip, true);
-        });
 
         gDataCtl = new data();
         gameCtl = this;
         this.MainViewAll.setPosition(0, 0);
         this.ShopBorder.active = false;
         gDataCtl.load();
-        // cc.audioEngine.play(this.buttonAudio, true, 1.0 )
-        // var HeroArray = [];
+        this.playMusic();
       
-        
-       
-        this.m_HeroData = new Array();
-        this.m_HeroData[0] = { id : 0, style : 0 };
-        this.m_HeroData[1] = { id : 1, style : 1 };
-        this.m_HeroData[2] = { id : 2, style : 2 };
-        this.m_HeroData[3] = { id : 3, style : 3 };
-        this.m_HeroData[4] = { id : 4, style : 4 };
-     
-
-       
-        //拿到商城背景被选中的预制体
-        for (var i = 0; i < this.m_HeroData.length; i++) { 
-            // console.log(this.m_HeroData.length);
-            var  hero = cc.instantiate(this.m_norHeroPrefab);
-            // console.log(hero);
-            this.m_ScrollContent.addChild(hero);
-            var Prefab = hero.getComponent('SelHeroPrefab');
-                Prefab.setStyle(this.m_HeroData[i]);
-            hero.id = i;
-            hero.isChecked = false;
-            hero = hero.on(cc.Node.EventType.TOUCH_END,this.touchEnd, this);
-            
-            // HeroArray.push(hero);
-            // HeroArray[i].id = i;
-            // HeroArray[i].isChecked = false;
-            // console.log(hero.id);
-            // console.log(hero.isChecked);
-           
-            
-        }  
-        //初始化默认第一个被选中
-        var childrenArr = this.m_ScrollContent.children;
-        // console.log(childrenArr);
-            childrenArr[0].isChecked = true;
-            var frame =  this.m_shopBackUI.getSpriteFrame('checked');
-            childrenArr[0].getComponent(cc.Sprite).spriteFrame = frame;
-
-        // for (var i = 0; i < HeroArray.length; i++) {
-        //     HeroArray[i].
-        // }
-        //点击事件
-
-        
-        //拿到初始图标的位置
-        // this.btStartPos = [];
-        // for (var i = 0; i < this.R_btn_action.length; i++) {
-        //     this.btStartPos[i] = this.R_btn_action[i].getPosition();
-        //     // console.log(position);    
-
-        // }
+        this.shopInit();
+        this.buttonInit();
+    },
+    
+    //按钮初始化
+    buttonInit: function () {
         //设置settings图标
         this.Setting = this.Setting.getComponent('settings');
         this.m_ClassArray.push(this.Setting);
@@ -117,62 +70,178 @@ cc.Class({
         this.m_ClassArray.push(this.MRight);
         //设置商店的金币刷新
         this.shopGold = this.shopGold.getComponent('shopGoldBar');
-        
-        
-        cc.director.resume();
+
 
     },
-    //点击切换该选中特效
-    touchEnd : function(event) {
-        cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
-            var audioID = cc.audioEngine.play(clip, false);
-        });
-        
-        // console.log(event);
-        self = this
-        // console.log(event.target.id);
-        // console.log(event.target.isChecked);
-        
-        
-        // console.log(childrenArr);
+    //商城初始化
+    shopInit: function () {
+
+        this.m_HeroData = new Array();
+        this.m_HeroData[0] = {
+            id: 0,
+            style: 0
+        };
+        this.m_HeroData[1] = {
+            id: 1,
+            style: 1
+        };
+        this.m_HeroData[2] = {
+            id: 2,
+            style: 2
+        };
+        this.m_HeroData[3] = {
+            id: 3,
+            style: 3
+        };
+        this.m_HeroData[4] = {
+            id: 4,
+            style: 4
+        };
+
+
+
+        //拿到商城背景被选中的预制体
+        for (var i = 0; i < this.m_HeroData.length; i++) {
+            // console.log(this.m_HeroData.length);
+            var hero = cc.instantiate(this.m_norHeroPrefab);
+            // console.log(hero);
+            this.m_ScrollContent.addChild(hero);
+            var Prefab = hero.getComponent('SelHeroPrefab');
+            Prefab.setStyle(this.m_HeroData[i]);
+            hero.id = i;
+            hero.isChecked = false;
+            hero.buy = false;
+            // hero = hero.on(cc.Node.EventType.TOUCH_END, this.touchEnd, this);
+
+            // HeroArray.push(hero);
+            // HeroArray[i].id = i;
+            // HeroArray[i].isChecked = false;
+            // console.log(hero.id);
+            // console.log(hero.isChecked);
+
+
+        }
+        //初始化默认第一个被选中
         var childrenArr = this.m_ScrollContent.children;
+        var Information = this.m_Information;
+        for (var i = 0; i < childrenArr.length; i++) {
+            if (i == 0) {
+                childrenArr[i].isChecked = true;
+                childrenArr[i].buy = true;
+                var frame = this.m_shopBackUI.getSpriteFrame('checked');
+                childrenArr[i].getComponent(cc.Sprite).spriteFrame = frame;
+                childrenArr[i].children[0].active = false;
+                childrenArr[i].children[1].active = false;
+            } else {
+                var price = i * 5000 + 5000;
+                //  console.log(price);
+                childrenArr[i].children[1].getComponent(cc.Label).string = price + '金币';
 
-        childrenArr.forEach((item) => {
-           if(item.id == event.target.id ) {
-                var cartArry = ['car01_1','car02_2','car03_1','car04_6','car05_1'];
-                item.isChecked = true;
-                var frame =  this.m_shopBackUI.getSpriteFrame('checked');
-                // console.log(item.id);
-                // console.log('您选择了这辆车哦');
-                childrenArr[item.id].getComponent(cc.Sprite).spriteFrame = frame;
-                var sprite = this. m_MainCartUI[item.id].getSpriteFrame(cartArry[item.id]);
-                this. m_MainShowCart.spriteFrame = sprite; 
+                //  var parseNumber = parseInt(number)
+                // console.log(number);
 
-            
-           }else{
+            }
+        }
 
-               item.isChecked = false;
-               var frame =  this.m_shopBackUI.getSpriteFrame('notchecked');
-               childrenArr[item.id].getComponent(cc.Sprite).spriteFrame = frame;
-            //  
-             
-           }
-          
+        childrenArr.forEach(function (item) {
+            childrenArr[item.id].children[0].on('click', function (event) {
+                Information.active = true;
+                var js1 = Information.getComponent('Information');
+                var money = parseInt(childrenArr[item.id].children[1].getComponent(cc.Label).string);
+                // console.log(money);
+                var gDataCtlMoney = gDataCtl.GetGold();
+                // console.log(gDataCtlMoney);
+                if (gDataCtlMoney < money) {
+                    js1.setLabel('还差' + (money - gDataCtlMoney) + '金币才可解锁');
+                    console.log( );
+
+                } else {
+                    js1.setLabel('已解锁,快去游戏体验吧！');
+                    childrenArr[item.id].children[0].active = false;
+                    childrenArr[item.id].buy = true;
+
+                }
+            });
+
         });
-        // console.log(this.m_ScrollContent.children);
-            
+        //商城选中的判断
+
+        // console.log(childrenArr);
+        // var childrenArr = this.m_ScrollContent.children;
+        var shopUI = this.m_shopBackUI;
+        var MainCartUI = this.m_MainCartUI;
+        var MainShowCart = this.m_MainShowCart;
+        // var Information = this.m_Information;
+        // console.log(childrenArr);
+        // console.log(childrenArr);
+        childrenArr.forEach(function (item) {
+
+            childrenArr[item.id].on(cc.Node.EventType.TOUCH_END, function (event) {
+
+                cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
+                    var audioID = cc.audioEngine.play(clip, false);
+                    // console.log(audioID);
+                    // console.log(err);
+                });
+                //   console.log(childrenArr[item.id]);
+                childrenArr.forEach(function (item1) {
+                    if (item1.id == event.target.id) {
+                        // console.log('这里是正确的');
+                        // console.log(childrenArr);
+                        var cartArry = ['car01_1', 'car02_2', 'car03_1', 'car04_6', 'car05_1'];
+                        item1.isChecked = true;
+                        var frame1 = shopUI.getSpriteFrame('checked');
+                        childrenArr[item1.id].getComponent(cc.Sprite).spriteFrame = frame1;
+                        if (childrenArr[item1.id].buy == true) {
+                            childrenArr[item.id].children[0].active = false;
+                            var sprite = MainCartUI[item1.id].getSpriteFrame(cartArry[item1.id]);
+                            // console.log(sprite);
+                            MainShowCart.spriteFrame = sprite;
+
+                        } else {
+                            var frame2 = shopUI.getSpriteFrame('notchecked');
+                            childrenArr[item1.id].getComponent(cc.Sprite).spriteFrame = frame2;
+                            var frame3 = shopUI.getSpriteFrame('checked');
+                            childrenArr[0].getComponent(cc.Sprite).spriteFrame = frame3;
+
+
+                            var sprite = MainCartUI[0].getSpriteFrame(cartArry[0]);
+                            // console.log(sprite);
+                            MainShowCart.spriteFrame = sprite;
+                            Information.active = true; //显示购买车辆弹窗
+                            var js1 = Information.getComponent('Information');
+                            js1.setLabel('车辆未解锁哦！'); //调用弹窗接口
+                        }
+
+                    } else {
+                        item.isChecked = false;
+                        // console.log('这里进入了');
+                        var frame4 = shopUI.getSpriteFrame('notchecked');
+                        childrenArr[item1.id].getComponent(cc.Sprite).spriteFrame = frame4;
+                        // console.log(childrenArr);
+                        //  
+
+                    }
+
+
+
+
+                }.bind(this), this);
+
+            });
+        });
+
     },
-    
     //进入游戏
     ChangeToGame: function () {
-        
+
         cc.director.loadScene("GameScene2");
         // cc.director.resume();
         cc.audioEngine.pauseAll();
     },
     //进入场景排行榜
     ChangeToLeaderBorder: function () {
-        
+
         cc.director.loadScene("LeaderBorder");
         cc.audioEngine.pauseAll();
     },
@@ -181,9 +250,9 @@ cc.Class({
         // console.log("触发了转向"+data);
         this.MainViewAll.active = false;
         // this.fadeOutOrIn(data);
-        
+
         var update = this.shopGold.getComponent('shopGoldBar');
-            update.updateTopData();
+        update.updateTopData();
         this.ShopBorder.active = true;
 
 
@@ -194,8 +263,8 @@ cc.Class({
         this.MainViewAll.active = true;
         // this.fadeOutOrIn(data);
         var update = this.m_topMenu.getComponent('GoldBar');
-            update.updateTopData();
-        
+        update.updateTopData();
+
         this.ShopBorder.active = false;
 
     },
@@ -203,21 +272,20 @@ cc.Class({
         this.m_ClassArray = new Array();
         //创建对象池
         this.goldPool = new cc.NodePool();
-        
-    
+
+
     },
     tests: function (target, data) {
-        if(data == "清空数据") {
-          
+        if (data == "清空数据") {
+
             gDataCtl.del();
 
 
-        }else if( data == "重载数据"){
+        } else if (data == "重载数据") {
             gDataCtl.setGoldAddTime(20);
             gDataCtl.setAwardGold(20);
 
-        }
-        else if (data == "移出") {
+        } else if (data == "移出") {
             for (var i = 0; i < this.m_ClassArray.length; i++) {
                 var cls = this.m_ClassArray[i];
                 if (cls.moveOutBar != null) {
@@ -244,7 +312,7 @@ cc.Class({
      * @param {切分多少块} goldCount 
      * 
      */
-    createGoldAnim: function (srcPos, dstPos, radius, goldCount,addGold,callback) {
+    createGoldAnim: function (srcPos, dstPos, radius, goldCount, addGold, callback) {
         var array = this.getPoint(radius, srcPos.x, srcPos.y, goldCount);
         var nodeArray = new Array();
         for (var i = 0; i < array.length; i++) {
@@ -274,12 +342,12 @@ cc.Class({
                 cc.moveTo(0.5, dstPos),
                 cc.callFunc(function (node) {
                     // this.MoneyAni.stopAllActions();
-                    if(!notPlay){
+                    if (!notPlay) {
                         notPlay = true;
                         var seq2 = cc.sequence(
-                            cc.scaleTo(0.1,0.8,0.8),
-                            cc.scaleTo(0.1,0.65,0.65),
-                            cc.callFunc(function(){
+                            cc.scaleTo(0.1, 0.8, 0.8),
+                            cc.scaleTo(0.1, 0.65, 0.65),
+                            cc.callFunc(function () {
                                 cc.loader.loadRes('assets/getmoney', cc.AudioClip, function (err, clip) {
                                     var audioID = cc.audioEngine.play(clip, false);
                                 });
@@ -289,11 +357,11 @@ cc.Class({
                         this.MoneyAni.runAction(seq2);
 
                     }
-                    if(node.id == nodeArray.length -1){
-                        if(callback != null){
+                    if (node.id == nodeArray.length - 1) {
+                        if (callback != null) {
                             callback(addGold);
                         }
-                        
+
                     }
                     this.onGoldKilled(node);
                     // console.log("产生了回调");
@@ -322,6 +390,65 @@ cc.Class({
     onGoldKilled: function (gold) {
         // enemy 应该是一个 cc.Node
         this.goldPool.put(gold); // 和初始化时的方法一样，将节点放进对象池，这个方法会同时调用节点的 removeFromParent
+    },
+    //设置提示车辆购买弹窗关闭
+    setInformationClose: function () {
+        this.m_Information.active = false;
+    },
+    //播放音乐
+    //初始化读取音乐状态
+    playMusic: function () {
+       
+        // console.log(cc.audioEngine.getState(gDataCtl.getPlayRoomMusicId()));
+        // if(gDataCtl.getPlayRoomMusicId > 0){
+            cc.loader.loadRes('assets/Main', cc.AudioClip, function (err, clip) {
+                var audioID = cc.audioEngine.play(clip, true, gDataCtl.getVle());
+                gDataCtl.setPlayRoomMusicId(audioID);
+            });
+        
+        var voiceStatus = gDataCtl.getRoomVoiceStatus();
+        if(voiceStatus) {
+            // console.log('当前'+gDataCtl.getPlayRoomMusicId());
+            // console.log(voiceStatus);
+          
+            var frame1 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_open@1x');
+            this.m_voice.getComponent(cc.Sprite).spriteFrame = frame1;
+            // cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), 1);
+        }else{
+           
+            var frame2 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_close@1x');
+            this.m_voice.getComponent(cc.Sprite).spriteFrame = frame2;
+            // cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), 0);
+        }
+      
+
+    },
+    //设置声音状态
+    setVoice: function () {
+        // console.log(is);
+        var status = gDataCtl.getRoomVoiceStatus();
+        if (status) {
+            status = false;
+            // cc.audioEngine.pause(gDataCtl.getPlayRoomMusicId());
+           
+            var volume = cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), gDataCtl.setVle(0));
+            // console.log('关闭音量：'+volume);
+            
+            gDataCtl.setRoomVoiceStatus(status);
+            var frame1 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_close@1x')
+            this.m_voice.getComponent(cc.Sprite).spriteFrame = frame1;
+        } else {
+            status = true;
+            cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), gDataCtl.setVle(1));
+            // console.log('开启音量：'+volume);
+            gDataCtl.setRoomVoiceStatus(status);
+            var frame2 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_open@1x');
+            this.m_voice.getComponent(cc.Sprite).spriteFrame = frame2;
+
+        }
+
+
+
     },
     /**
      * 求圆周上等分点的坐标的坐标

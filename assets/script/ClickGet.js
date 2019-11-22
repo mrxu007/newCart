@@ -58,7 +58,7 @@ cc.Class({
         this.m_progress.progress += dis;
         if(this.m_progress.progress >= 1) {
             this.m_progress.progress = 0;
-            var gold = gDataCtl.getAwardGold();
+            var gold = gDataCtl.getAwardGold(100);
             gDataCtl.addTaskGold(gold);
             gDataCtl.save();
             this.updataGold();

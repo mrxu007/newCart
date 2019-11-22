@@ -6,6 +6,8 @@ cc.Class({
 
      
         m_norHeroPrefab0: cc.Prefab,
+        can_buyit: cc.Button,
+        Price: cc.Label,
      
     },
     //设置背景
@@ -18,7 +20,7 @@ cc.Class({
     },
 
     setHeroStyle: function(heroData) {
-
+      
         var hero = cc.instantiate(this.m_norHeroPrefab0);
             this.node.addChild(hero);
         var Prefab = hero.getComponent('HeroUI');
@@ -26,7 +28,12 @@ cc.Class({
 
       
     },
-
+    setAudio: function(){
+        cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
+            var audioID = cc.audioEngine.play(clip, false);
+        });
+    },
+    
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},

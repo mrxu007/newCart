@@ -1,8 +1,7 @@
-
-
 window.gameCtl = null;
 // 游戏所有的数据存放处
 window.gData = {};
+
 window.gDataCtl = null;
  window.is = false;
 //全局随机数

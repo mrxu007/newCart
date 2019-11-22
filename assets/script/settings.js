@@ -43,13 +43,14 @@ cc.Class({
     toggleMeue: function() {
         
             if(!is){
+               
                 is = true;
-                var moveTo = cc.moveTo(0.5,cc.v3(144.22,428.802));
+                var moveTo = cc.moveTo(0.5,cc.v3(175,428.802));
                 this.m_setting.runAction(moveTo);
                 
             }else{
                 is = false;
-                var moveTo = cc.moveTo(0.5,cc.v3(42.563,428.802));
+                var moveTo = cc.moveTo(0.5,cc.v3(77.74,428.802));
                 this.m_setting.runAction(moveTo);
                 
                 
