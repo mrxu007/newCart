@@ -42,8 +42,10 @@ cc.Class({
         this.MainViewAll.setPosition(0, 0);
         this.ShopBorder.active = false;
         gDataCtl.load();
-        this.playMusic();
-      
+       
+        var vle = gDataCtl.getVle();
+        this.playMusic(vle);
+       
         this.shopInit();
         this.buttonInit();
     },
@@ -235,7 +237,13 @@ cc.Class({
     //进入游戏
     ChangeToGame: function () {
 
-        cc.director.loadScene("GameScene2");
+        cc.director.loadScene("GameScene4");
+        // cc.director.resume();
+        cc.audioEngine.pauseAll();
+    },
+    ChangeToGame2: function () {
+
+        cc.director.loadScene("GameScene4");
         // cc.director.resume();
         cc.audioEngine.pauseAll();
     },
@@ -243,9 +251,10 @@ cc.Class({
     ChangeToLeaderBorder: function () {
 
         cc.director.loadScene("LeaderBorder");
+        // cc.audioEngine.pause(gDataCtl.getPlayRoomMusicId());
         cc.audioEngine.pauseAll();
     },
-    //切换ShopBorder和游戏主界面
+    //切换ShopBorder
     openShopBorder: function (event, data) {
         // console.log("触发了转向"+data);
         this.MainViewAll.active = false;
@@ -253,6 +262,7 @@ cc.Class({
 
         var update = this.shopGold.getComponent('shopGoldBar');
         update.updateTopData();
+        
         this.ShopBorder.active = true;
 
 
@@ -397,12 +407,12 @@ cc.Class({
     },
     //播放音乐
     //初始化读取音乐状态
-    playMusic: function () {
+    playMusic: function (volume) {
        
         // console.log(cc.audioEngine.getState(gDataCtl.getPlayRoomMusicId()));
         // if(gDataCtl.getPlayRoomMusicId > 0){
             cc.loader.loadRes('assets/Main', cc.AudioClip, function (err, clip) {
-                var audioID = cc.audioEngine.play(clip, true, gDataCtl.getVle());
+                var audioID = cc.audioEngine.play(clip, true, volume);
                 gDataCtl.setPlayRoomMusicId(audioID);
             });
         

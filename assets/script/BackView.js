@@ -35,7 +35,7 @@ cc.Class({
      
         this.registerEvent();
         this.moveBackGround();
-     
+        
         
     },
 
@@ -45,9 +45,7 @@ cc.Class({
 
         this.Touch_view.on(cc.Node.EventType.TOUCH_START,this.touchStart, this);
         // this.Touch_view.on(cc.Node.EventType.TOUCH_START, throttle(this.touchStart, 200), this);
-        this.Touch_view.on(cc.Node.EventType.TOUCH_MOVE, this.touchMove, this);
-        // this.Touch_view.on(cc.Node.EventType.TOUCH_CANCEL, this.touchCancel, this);
-        // this.Touch_view.on(cc.Node.EventType.TOUCH_END, throttle(this.touchEnd, 200), this);
+
         this.Touch_view.on(cc.Node.EventType.TOUCH_END,this.touchEnd, this);
         
      

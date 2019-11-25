@@ -3543,7 +3543,7 @@
     },
     "component": "",
     "_componentId": "a728dGoIaZPWK38JgMUAlwp",
-    "handler": "ChangeToGame",
+    "handler": "ChangeToGame2",
     "customEventData": ""
   },
   {
