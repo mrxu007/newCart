@@ -7,10 +7,10 @@ cc.Class({
             type: cc.Node,
             default: null
         },
-        Bt_move: {
-            type: cc.Node,
-            default: null
-        },
+        // Bt_move: {
+        //     type: cc.Node,
+        //     default: null
+        // },
         Touch_view: {
             type: cc.Node,
             default: null
@@ -35,6 +35,7 @@ cc.Class({
      
         this.registerEvent();
         this.moveBackGround();
+        // console.log('1111');
         
         
     },
