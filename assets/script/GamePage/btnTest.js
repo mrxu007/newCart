@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+var gameApi = require('GameAPI');
 cc.Class({
     extends: cc.Component,
 
@@ -33,8 +33,10 @@ cc.Class({
 
     // onLoad () {},
     ChangeToRoom: function () {
-
+        gameApi.setGold(1000);
+        console.log('金币测试添加成功');
         cc.director.loadScene("RoomScene2");
+
         // cc.director.resume();
         // cc.audioEngine.pauseAll();
     },
