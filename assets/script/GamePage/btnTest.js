@@ -33,7 +33,7 @@ cc.Class({
 
     // onLoad () {},
     ChangeToRoom: function () {
-        gameApi.setGold(1000);
+        gameApi.setGold(100000);
         console.log('金币测试添加成功');
         cc.director.loadScene("RoomScene2");
 

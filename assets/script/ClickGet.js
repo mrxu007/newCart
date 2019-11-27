@@ -5,19 +5,21 @@ cc.Class({
         m_progress: cc.ProgressBar,
         m_labGold: cc.Label,
         m_topMenu: cc.Node,
+        
        
                    
  
     },
     //按钮调用创建金币
     onClickGet:function(target,data) {
+        var topPos = this.m_topMenu.getPosition();
         // console.log("调用金币时坐标"+this.node.getPosition());
         // console.log("获取金币");
         // console.log(this.node.getPosition());
         if(gDataCtl.getTaskGold() <= 0)return;
         gameCtl.createGoldAnim(
             this.node.getPosition(),
-            cc.v3(-74.637,566.47),
+            cc.v3(topPos.x,topPos.y+100),
             300,
             20,
             gDataCtl.getTaskGold(),
@@ -43,6 +45,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+       
+        // console.log(topPos);
         this.updataGold();
     },
 
