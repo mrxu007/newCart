@@ -23,7 +23,7 @@ cc.Class({
     // onLoad () {},
     ChangeToMain: function () {
 
-        cc.director.loadScene("RoomScene");
+        cc.director.loadScene("RoomScene2");
         // cc.audioEngine.resumeAll();
     },
     clickAudio: function() {

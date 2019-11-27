@@ -1,10 +1,10 @@
-require('define');
 cc.Class({
     extends: cc.Component,
 
     properties: {
         m_progress: cc.ProgressBar,
         m_labGold: cc.Label,
+        m_topMenu: cc.Node,
        
                    
  
@@ -13,18 +13,20 @@ cc.Class({
     onClickGet:function(target,data) {
         // console.log("调用金币时坐标"+this.node.getPosition());
         // console.log("获取金币");
-        
+        // console.log(this.node.getPosition());
         if(gDataCtl.getTaskGold() <= 0)return;
         gameCtl.createGoldAnim(
             this.node.getPosition(),
-            cc.v3(-123.564,999.467),
+            cc.v3(-74.637,566.47),
             300,
             20,
             gDataCtl.getTaskGold(),
             function(gold) {
+                // console.log(gold);
                 gDataCtl.AddGold(gold);
                 // console.log(gold);
-                gameCtl.GoldBar.updateTopData();
+                var update = this.m_topMenu.getComponent('GoldBar');
+                    update.updateTopData();
             }.bind(this)
             );
             gDataCtl.ClearTaskGold();
@@ -56,7 +58,7 @@ cc.Class({
         this.m_progress.progress += dis;
         if(this.m_progress.progress >= 1) {
             this.m_progress.progress = 0;
-            var gold = gDataCtl.getAwardGold();
+            var gold = gDataCtl.getAwardGold(100);
             gDataCtl.addTaskGold(gold);
             gDataCtl.save();
             this.updataGold();

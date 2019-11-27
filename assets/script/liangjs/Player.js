@@ -47,18 +47,19 @@ cc.Class({
     onSkill: function () {
         cc.audioEngine.playEffect(this.buttonAudio, false);
         if (this.skill > 0) {
-            console.log('技能开启');
+            // console.log('技能开启');
             this.skill -= 1;
             // this.schedule(() => {
             //     this.openSkill = true;
             // }, 3);
             this.openSkill = true;
-            this.node.setScale(5, 5);
+            this.node.setScale(4, 4);
             this.scheduleOnce(() => {
                 this.openSkill = false;
-                this.node.setScale(4, 4);
-                console.log('技能结束');
+                this.node.setScale(2, 2);
+                // console.log('技能结束');
             }, 3);
+            //console.log(this.skill);
             this.strongerNum.string = this.skill;
         }
         
@@ -86,22 +87,20 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        console.log('检测到');
         if(this.openSkill == false){
             if (other.node.group == 'goods' || other.node.group == 'tree') {
                 this.skill = 0;
                 cc.audioEngine.stopAll();
                 cc.audioEngine.playEffect(this.collisionAudio, false);
                 cc.director.pause();
-                // this.MainAction.pauseAllActions();
-                // this.MainAction.Director.pause();
-                console.log ('撞到了');
-                //关闭触摸监听
-                //cc.find('Canvas/BaseView').getComponent('BackView').shutEvent();
+                
+                // this.getComponent('cc.Animation').play();
+                // this.node.destroy();
+           
                 this.Road.getComponent('Control').gameOver();
                 
                 cc.find('Canvas/BaseView/BG1/Back/Road').getComponent('Control').spawnFunc();
-                this.strongerNum.string = 'x' + this.strongerNum;
+                this.strongerNum.string = 0;
             
             
             } else if(other.node.group == 'stronger') {
@@ -149,7 +148,7 @@ cc.Class({
     },
 
     
-    update (dt) {
-        console.log(this.skill);
-    },
+    // update (dt) {
+        
+    // },
 });

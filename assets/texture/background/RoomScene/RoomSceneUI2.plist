@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{80,107}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{80,107}}</string>
+                <string>{{164,0},{80,107}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>9b109b5e2fc980accb6144dece70859.png</key>
             <dict>
@@ -26,11 +26,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,2208}</string>
+                <string>{159,1280}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,2208}</string>
+                <string>{159,1280}</string>
                 <key>textureRect</key>
-                <string>{{1,85},{160,2208}}</string>
+                <string>{{0,0},{159,1280}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -46,9 +46,9 @@
             <key>realTextureFileName</key>
             <string>RoomSceneUI2.png</string>
             <key>size</key>
-            <string>{162,2294}</string>
+            <string>{244,1280}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fe309eeffa9c7099c86048d8fe90bb5c:a8abd43d029802a7a79059374805c8c9:85be2b26ebbc881fd1ccacd2f7b7cd37$</string>
+            <string>$TexturePacker:SmartUpdate:fccd3727e7cc342c79d5c558adfd89e8:b01c7874a69c67c41cf1bbbe45485c26:85be2b26ebbc881fd1ccacd2f7b7cd37$</string>
             <key>textureFileName</key>
             <string>RoomSceneUI2.png</string>
         </dict>

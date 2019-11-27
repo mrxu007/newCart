@@ -42,8 +42,8 @@ cc.Class({
     },
     play: function() {
         var seq = cc.sequence(
-            cc.scaleTo(0.5,1.2,1.2),
             cc.scaleTo(0.5,1,1),
+            cc.scaleTo(0.5,0.8,0.8),
             cc.rotateTo(0.5,-15),
             cc.rotateTo(0.5,0),
             cc.delayTime(1),

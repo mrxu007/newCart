@@ -32,8 +32,13 @@ cc.Class({
         var str = cc.sys.localStorage.getItem('data');
             gData = JSON.parse(str); 
             if(gData == null) {
-                gData = {}
+                gData = {};
             }
+            if(gData.volume == undefined){
+                gData.volume = 1;
+                // console.log('已生成gData.volume数据');
+            }
+        
             // console.log(gData);
             return gData;
 
@@ -49,6 +54,7 @@ cc.Class({
             gData.m_GoldValue = 0;
         }
         gData.m_GoldValue = 0;
+        gData.m_TaskGold = 0;
 
         console.log('数据已清空');
         this.save();
@@ -77,18 +83,19 @@ cc.Class({
       this.save();
     },
     //获取进度条时间
-    getGoldAddtime: function(time) {
+    getGoldAddtime: function() {
     
-        if(gData.m_GetGoldTime == null) {
+        
             gData.m_GetGoldTime = 20;
-        }
+        
         return gData.m_GetGoldTime;
     },
     //获取奖励金币
     getAwardGold: function(gold) {
-        if(gData.m_AwardGold == null) {
-            gData.m_AwardGold = 20;
-        }
+      
+            gData.m_AwardGold = gold;
+        
+        
         return gData.m_AwardGold;
     },
   
@@ -99,6 +106,8 @@ cc.Class({
         gData.m_AwardGold = gold;
         this.save();
     },
+
+
     addTaskGold: function(gold) {
         if(gData.m_TaskGold == null) {
             gData.m_TaskGold = 0;
@@ -119,7 +128,56 @@ cc.Class({
         gData.m_TaskGold = 0;
         this.save();
     },
+    //设置本地音乐的状态
+    setRoomVoiceStatus(status) {
+        if(gData.RoomVoiceStatus == null) {
+            gData.RoomVoiceStatus = true;
+        }else{
+            gData.RoomVoiceStatus = status;
+        }
+        this.save();
+        // console.log('当前本地设置的音乐状态是'+gData.RoomVoiceStatus);
+    },
+    //获取本地音乐的状态
+    getRoomVoiceStatus: function () {
+        // console.log('当前正在读取');
+        if(gData.RoomVoiceStatus == null) {
+            gData.RoomVoiceStatus = true;
+        }
+        return gData.RoomVoiceStatus;
+    },
+    //设置音量
+    setVle: function(vl) {
+        if(gData.volume = null) {
+            // console.log('data文件:自动生成gData.volume变量');
+            gData.volume = 1;
+        }else{
+            gData.volume = vl;
+        }
+       
+        this.save();
+        return gData.volume;
+        // console.log('data文件:已保存音量'+gData.volume);
+        
+    },
+    //获取音量
+    getVle: function() {
+        // console.log('正在读取音量'+gData.volume);
+        return gData.volume;
+    },
 
+    setPlayRoomMusicId: function(id) {
+       
+            gData.RoomMusicId = id
+            this.save();
+            // console.log('data文件:设置---音频的id:'+ id);
+
+
+    },
+    getPlayRoomMusicId: function() {
+        // console.log('data文件:获取---音频的id:'+ gData.RoomMusicId);
+        return gData.RoomMusicId;
+    },
     start () {
 
     },
