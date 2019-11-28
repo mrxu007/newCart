@@ -60,19 +60,6 @@ cc.Class({
     },
     load: function () {
         var str = cc.sys.localStorage.getItem('data');
-<<<<<<< HEAD
-            gData = JSON.parse(str); 
-            if(gData == null) {
-                gData = {};
-            }
-            if(gData.volume == undefined){
-                gData.volume = 1;
-                // console.log('已生成gData.volume数据');
-            }
-        
-            console.log(gData);
-            return gData;
-=======
         gData = JSON.parse(str);
         if (gData == null) {
             gData = {};
@@ -87,9 +74,6 @@ cc.Class({
         }
         console.log(gData);
         return gData;
->>>>>>> xu-dev
-
-
     },
     reload: function () {
         cc.sys.localStorage.removeItem('data');
