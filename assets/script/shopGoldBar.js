@@ -18,7 +18,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.m_labelGold.string = '' + tranNumber( gDataCtl.GetGold(),1);
+        // this.m_labelGold.string = '' + tranNumber( gDataCtl.GetGold(),1);
         this.updateTopData();
     },
     updateTopData: function() {

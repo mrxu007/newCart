@@ -1,4 +1,5 @@
 var data = require('data');
+var gameApi = require('GameAPI');
 cc.Class({
     extends: cc.Component,
 
@@ -42,14 +43,16 @@ cc.Class({
         this.MainViewAll.setPosition(0, 0);
         this.ShopBorder.active = false;
         gDataCtl.load();
-       
+
         var vle = gDataCtl.getVle();
         this.playMusic(vle);
-       
+
         this.shopInit();
         this.buttonInit();
+       
+        
     },
-    
+
     //按钮初始化
     buttonInit: function () {
         //设置settings图标
@@ -123,30 +126,42 @@ cc.Class({
 
 
         }
-        //初始化默认第一个被选中
+        //初始化读取数据库车辆状态数据
         var childrenArr = this.m_ScrollContent.children;
         var Information = this.m_Information;
-        for (var i = 0; i < childrenArr.length; i++) {
-            if (i == 0) {
-                childrenArr[i].isChecked = true;
-                childrenArr[i].buy = true;
-                var frame = this.m_shopBackUI.getSpriteFrame('checked');
-                childrenArr[i].getComponent(cc.Sprite).spriteFrame = frame;
-                childrenArr[i].children[0].active = false;
-                childrenArr[i].children[1].active = false;
-            } else {
-                var price = i * 5000 + 5000;
-                //  console.log(price);
-                childrenArr[i].children[1].getComponent(cc.Label).string = price + '金币';
+        var cartStatus = gameApi.getCartBuy();
+        var shopGold = this.shopGold.getComponent('shopGoldBar');
+        console.log(cartStatus);
+        for (var i = 0; i < cartStatus.length; i++) {
 
-                //  var parseNumber = parseInt(number)
-                // console.log(number);
+            if (i == 0) {
+                childrenArr[0].isChecked = true;
+                childrenArr[0].buy = true;
+                var frame = this.m_shopBackUI.getSpriteFrame('checked');
+                childrenArr[0].getComponent(cc.Sprite).spriteFrame = frame;
+                childrenArr[0].children[0].active = false;
+                childrenArr[0].children[1].active = false;
+
 
             }
+            if (cartStatus[i].status == true) {
+
+                childrenArr[i].children[0].active = false;
+                childrenArr[i].children[1].active = false;
+                //  var parseNumber = parseInt(number)
+                // console.log(number);
+            } else {
+
+                var price = i * 5000 + 999;
+                childrenArr[i].children[1].getComponent(cc.Label).string = price + '金币';
+            }
+
         }
+        //点击按钮解锁
 
         childrenArr.forEach(function (item) {
             childrenArr[item.id].children[0].on('click', function (event) {
+                // console.log(event);
                 Information.active = true;
                 var js1 = Information.getComponent('Information');
                 var money = parseInt(childrenArr[item.id].children[1].getComponent(cc.Label).string);
@@ -155,12 +170,26 @@ cc.Class({
                 // console.log(gDataCtlMoney);
                 if (gDataCtlMoney < money) {
                     js1.setLabel('还差' + (money - gDataCtlMoney) + '金币才可解锁');
-                    console.log( );
+                    // console.log( );
 
                 } else {
+                   
+                    money =  gDataCtlMoney - money;
+                    gameApi.setGold2(money); 
+                    // shopGold = this.shopGold.getComponent('shopGoldBar');
+                    // shopGold.updateTopData();
+                  
+                        shopGold.updateTopData(); 
+
                     js1.setLabel('已解锁,快去游戏体验吧！');
                     childrenArr[item.id].children[0].active = false;
+                    cartStatus[item.id].buy = true;
+                    childrenArr[item.id].children[1].active = false;
+                    gameApi.setCartBuy(item.id);
+                    //下面的buy属性可有可无
                     childrenArr[item.id].buy = true;
+
+
 
                 }
             });
@@ -194,7 +223,7 @@ cc.Class({
                         item1.isChecked = true;
                         var frame1 = shopUI.getSpriteFrame('checked');
                         childrenArr[item1.id].getComponent(cc.Sprite).spriteFrame = frame1;
-                        if (childrenArr[item1.id].buy == true) {
+                        if (cartStatus[item1.id].status == true) {
                             childrenArr[item.id].children[0].active = false;
                             var sprite = MainCartUI[item1.id].getSpriteFrame(cartArry[item1.id]);
                             // console.log(sprite);
@@ -262,7 +291,7 @@ cc.Class({
 
         var update = this.shopGold.getComponent('shopGoldBar');
         update.updateTopData();
-        
+
         this.ShopBorder.active = true;
 
 
@@ -408,29 +437,29 @@ cc.Class({
     //播放音乐
     //初始化读取音乐状态
     playMusic: function (volume) {
-       
+
         // console.log(cc.audioEngine.getState(gDataCtl.getPlayRoomMusicId()));
         // if(gDataCtl.getPlayRoomMusicId > 0){
-            cc.loader.loadRes('assets/Main', cc.AudioClip, function (err, clip) {
-                var audioID = cc.audioEngine.play(clip, true, volume);
-                gDataCtl.setPlayRoomMusicId(audioID);
-            });
-        
+        cc.loader.loadRes('assets/Main', cc.AudioClip, function (err, clip) {
+            var audioID = cc.audioEngine.play(clip, true, volume);
+            gDataCtl.setPlayRoomMusicId(audioID);
+        });
+
         var voiceStatus = gDataCtl.getRoomVoiceStatus();
-        if(voiceStatus) {
+        if (voiceStatus) {
             // console.log('当前'+gDataCtl.getPlayRoomMusicId());
             // console.log(voiceStatus);
-          
+
             var frame1 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_open@1x');
             this.m_voice.getComponent(cc.Sprite).spriteFrame = frame1;
             // cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), 1);
-        }else{
-           
+        } else {
+
             var frame2 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_close@1x');
             this.m_voice.getComponent(cc.Sprite).spriteFrame = frame2;
             // cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), 0);
         }
-      
+
 
     },
     //设置声音状态
@@ -440,10 +469,10 @@ cc.Class({
         if (status) {
             status = false;
             // cc.audioEngine.pause(gDataCtl.getPlayRoomMusicId());
-           
+
             var volume = cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), gDataCtl.setVle(0));
             // console.log('关闭音量：'+volume);
-            
+
             gDataCtl.setRoomVoiceStatus(status);
             var frame1 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_close@1x')
             this.m_voice.getComponent(cc.Sprite).spriteFrame = frame1;

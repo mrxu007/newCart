@@ -1,5 +1,3 @@
-
-
 // Learn cc.Class:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
 //  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
@@ -14,7 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-    
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -22,14 +20,47 @@ cc.Class({
     // onLoad () {
     // },
     //储存只能储存字符串，但是传的是json，所以要进行转换
-    save: function() {
+    save: function () {
         var str = JSON.stringify(gData);
         // console.log(str);
-        cc.sys.localStorage.setItem('data',str);
+        cc.sys.localStorage.setItem('data', str);
         // console.log(str);
     },
-    load: function() {
+    //基础数据
+    simpleData: function () {
+        console.log('已注入新的数据项');
+        if (gData.BuyCartStatus == undefined) {
+            gData.BuyCartStatus = [{
+                    id: 0,
+                    status: true
+                },
+                {
+                    id: 1,
+                    status: false
+                },
+                {
+                    id: 2,
+                    status: false
+                },
+                {
+                    id: 3,
+                    status: false
+                },
+                {
+                    id: 4,
+                    status: false
+                },
+            ];
+        }
+        if (gData.volume == undefined) {
+
+            gData.volume = 1;
+            // console.log('已生成gData.volume数据');
+        }
+    },
+    load: function () {
         var str = cc.sys.localStorage.getItem('data');
+<<<<<<< HEAD
             gData = JSON.parse(str); 
             if(gData == null) {
                 gData = {};
@@ -41,6 +72,22 @@ cc.Class({
         
             console.log(gData);
             return gData;
+=======
+        gData = JSON.parse(str);
+        if (gData == null) {
+            gData = {};
+        }
+        // this.simpleData();
+        if (gData.DataStatus == undefined) {
+            gData.DataStatus = 1;
+            this.simpleData();
+            
+        }else{
+            console.log('已经初始化后就不会再初始化了');
+        }
+        console.log(gData);
+        return gData;
+>>>>>>> xu-dev
 
 
     },
@@ -48,28 +95,45 @@ cc.Class({
         cc.sys.localStorage.removeItem('data');
         this.save();
     },
-    del: function() {
+    del: function () {
         // cc.sys.localStorage.removeItem('data');
-        if( gData.m_GoldValue == null) {
+        if (gData.m_GoldValue == null) {
             gData.m_GoldValue = 0;
         }
         gData.m_GoldValue = 0;
         gData.m_TaskGold = 0;
+        gData.BuyCartStatus = [
+            { id: 0, status: true},
+            { id: 1, status: false},
+            { id: 2, status: false},
+            { id: 3, status: false},
+            { id: 4, status: false},
+        
+        ];
 
         console.log('数据已清空');
         this.save();
 
     },
-    AddGold: function(gold) {
-        if( gData.m_GoldValue == null) {
+    AddGold: function (gold) {
+        if (gData.m_GoldValue == null) {
             gData.m_GoldValue = 0;
         }
         gData.m_GoldValue += gold;
         this.save();
 
     },
-    GetGold: function() {
-        if( gData.m_GoldValue == null) {
+    //购买车辆设置的
+    AddGold2: function (gold) {
+        if (gData.m_GoldValue == null) {
+            gData.m_GoldValue = 0;
+        }
+        gData.m_GoldValue = gold;
+        this.save();
+
+    },
+    GetGold: function () {
+        if (gData.m_GoldValue == null) {
             gData.m_GoldValue = 0;
         }
         return gData.m_GoldValue;
@@ -77,30 +141,30 @@ cc.Class({
     },
     //进度条增加金币
     //设置金币进度条时间
-    setGoldAddTime: function(time) {
-        
-      gData.m_GetGoldTime = time;
-      this.save();
+    setGoldAddTime: function (time) {
+
+        gData.m_GetGoldTime = time;
+        this.save();
     },
     //获取进度条时间
-    getGoldAddtime: function() {
-    
-        
-            gData.m_GetGoldTime = 20;
-        
+    getGoldAddtime: function () {
+
+
+        gData.m_GetGoldTime = 20;
+
         return gData.m_GetGoldTime;
     },
     //获取奖励金币
-    getAwardGold: function(gold) {
-      
-            gData.m_AwardGold = gold;
-        
-        
+    getAwardGold: function (gold) {
+
+        gData.m_AwardGold = gold;
+
+
         return gData.m_AwardGold;
     },
-  
+
     setAwardGold: function (gold) {
-        if(gData.m_AwardGold == null) {
+        if (gData.m_AwardGold == null) {
             gData.m_AwardGold = 20;
         }
         gData.m_AwardGold = gold;
@@ -108,31 +172,31 @@ cc.Class({
     },
 
 
-    addTaskGold: function(gold) {
-        if(gData.m_TaskGold == null) {
+    addTaskGold: function (gold) {
+        if (gData.m_TaskGold == null) {
             gData.m_TaskGold = 0;
         }
-         gData.m_TaskGold += gold;
-         this.save();
+        gData.m_TaskGold += gold;
+        this.save();
     },
     //实际上可以领多少钱
-    getTaskGold: function(gold) {
-        if(gData.m_TaskGold == null) {
+    getTaskGold: function (gold) {
+        if (gData.m_TaskGold == null) {
             gData.m_TaskGold = 0;
         }
-        return gData.m_TaskGold ;
-        
+        return gData.m_TaskGold;
+
     },
     //重置奖金
-    ClearTaskGold: function() {
+    ClearTaskGold: function () {
         gData.m_TaskGold = 0;
         this.save();
     },
     //设置本地音乐的状态
     setRoomVoiceStatus(status) {
-        if(gData.RoomVoiceStatus == null) {
+        if (gData.RoomVoiceStatus == null) {
             gData.RoomVoiceStatus = true;
-        }else{
+        } else {
             gData.RoomVoiceStatus = status;
         }
         this.save();
@@ -141,44 +205,58 @@ cc.Class({
     //获取本地音乐的状态
     getRoomVoiceStatus: function () {
         // console.log('当前正在读取');
-        if(gData.RoomVoiceStatus == null) {
+        if (gData.RoomVoiceStatus == null) {
             gData.RoomVoiceStatus = true;
         }
         return gData.RoomVoiceStatus;
     },
     //设置音量
-    setVle: function(vl) {
-        if(gData.volume = null) {
+    setVle: function (vl) {
+        if (gData.volume = null) {
             // console.log('data文件:自动生成gData.volume变量');
             gData.volume = 1;
-        }else{
+        } else {
             gData.volume = vl;
         }
-       
+
         this.save();
         return gData.volume;
         // console.log('data文件:已保存音量'+gData.volume);
-        
+
     },
     //获取音量
-    getVle: function() {
+    getVle: function () {
         // console.log('正在读取音量'+gData.volume);
         return gData.volume;
     },
 
-    setPlayRoomMusicId: function(id) {
-       
-            gData.RoomMusicId = id
-            this.save();
-            // console.log('data文件:设置---音频的id:'+ id);
+    setPlayRoomMusicId: function (id) {
 
-
+        gData.RoomMusicId = id
+        this.save();
+        // console.log('data文件:设置---音频的id:'+ id);
     },
-    getPlayRoomMusicId: function() {
+    getPlayRoomMusicId: function () {
         // console.log('data文件:获取---音频的id:'+ gData.RoomMusicId);
         return gData.RoomMusicId;
     },
-    start () {
+    setCartStatus: function (cartInfoId) {
+        // console.log(gData.BuyCartStatus[cartInfo].status);
+        gData.BuyCartStatus[cartInfoId].status = true;
+        console.log(gData);
+        this.save();
+        // gData.BuyCartStatus[cartInfoId].status;
+    },
+    getCartStatus: function () {
+        // console.log(gData.BuyCartStatus);
+        return gData.BuyCartStatus;
+    },
+    // getCartStatus: function()
+    // {
+    //     gData.BuyCartStatus[i]
+    // }
+
+    start() {
 
     },
 
