@@ -32,7 +32,7 @@ cc.Class({
             type: cc.Prefab,
         },
         gold_prefab: {
-            default: null,
+            default: [],
             type: cc.Prefab,
         },
         player_prefab: {
@@ -82,19 +82,21 @@ cc.Class({
         var _tree_group = cc.instantiate(this.tree_group[idn]);
         this.node.addChild(_tree_group);
         _tree_group.setPosition(0 ,1200);
+        _tree_group.zIndex = 100;
     },
 
-    //随机生成金币
+    //随机生成金币组
     gold_create: function () {
-        var gold = cc.instantiate(this.gold_prefab);
+        var bt = Math.floor(Math.random() * 4);
+        var gold = cc.instantiate(this.gold_prefab[bt]);
         this.node.addChild(gold);
         var pos = this._posion_spawn_gold();
         gold.setPosition(pos);
     },
     //金币的初始位置
     _posion_spawn_gold: function () {
-        var pos = cc.v2(170, 0);
-        pos.x *= Math.floor(Math.random() * 3) - 1;
+        var pos = cc.v2(0, 0);
+        //pos.x *= Math.floor(Math.random() * 3) - 1;
         pos.y = 600 + Math.random() * 300;
         return cc.v2(pos.x, pos.y);
     },

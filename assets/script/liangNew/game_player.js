@@ -31,7 +31,6 @@ cc.Class({
             default: [],
             type: cc.SpriteFrame,
         },
-
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -41,16 +40,34 @@ cc.Class({
         //获取子节点anim
         this.anim = this.node.getChildByName('anim');
         this.registerEvent();
+        this._set_player_skin();
+        //初始化表现分
+        this.score = 0;
     },
 
     start () {
-
+        this.schedule(function() {
+            this.score + 2;
+        }, 1)
     },
 
-    onCollisionEnter: function () {
-        console.log('撞到了');
-        this.node.getComponent(cc.AudioSource).play();
-        this.node.removeFromParent();
+    //设置皮肤
+    _set_player_skin: function () {
+        this.anim.getComponent(cc.Sprite).spriteFrame = this.player_skin[1];
+    },
+
+    onCollisionEnter: function (other, self) {
+        if(other.node.group == 'tree'){
+            this.anim.getComponent(cc.Animation).play(0);
+            this.scheduleOnce(function() {
+                this.node.removeFromParent();
+            }, 2);
+        } else if(other.node.group == 'money') {
+            this.node.parent.getComponent('game_page').add_gold_score();
+            this.score += 50;
+        }
+        
+        
     },
 
     //注册监听触摸事件
@@ -96,14 +113,14 @@ cc.Class({
         if (endX > 0) {
             // console.log("判定向左");
             // console.log(endX);
-            if (vector1 <= -195) {
-                vector1 = -186;
+            if (vector1 <= -160) {
+                vector1 = -160;
             }
             this.moveChange('left', vector1);
 
         } else if (endX < 0) {
-            if (vector2 >= 186) {
-                vector2 = 186;
+            if (vector2 >= 160) {
+                vector2 = 160;
             }
             // console.log("判定向右");
             // console.log(endX);
@@ -153,5 +170,7 @@ cc.Class({
         }
     },
 
-    // update (dt) {},
+    update (dt) {
+
+    },
 });

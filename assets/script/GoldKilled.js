@@ -9,16 +9,18 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.node.zIndex = 50;
         this.speed = 560;
+
     },
 
     start () {
 
     },
 
-    onCollision: function () {
+    onCollisionEnter: function () {
         this.node.getComponent(cc.AudioSource).play();
-        this.node.parent.getComponent('game_page').add_gold_score();
+        
         this.node.removeFromParent();
     },
 

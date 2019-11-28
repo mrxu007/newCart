@@ -156,7 +156,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 357.4305169337181
+      "z": 516.1511406555254
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -467,11 +467,22 @@
         "__uuid__": "337a45cf-0d48-498c-8ecc-b2b5c2775a71"
       }
     ],
-    "gold_prefab": {
-      "__uuid__": "153bd752-3480-4f76-88b8-485e593e802f"
-    },
+    "gold_prefab": [
+      {
+        "__uuid__": "cb8388eb-3435-436b-8ccc-8533b0c544c7"
+      },
+      {
+        "__uuid__": "318ae8bb-85f6-42f0-bf2c-fe66f24d5bf5"
+      },
+      {
+        "__uuid__": "053550e7-7297-40ce-add7-b2a78e5ec105"
+      },
+      {
+        "__uuid__": "b72208a2-0caf-47d9-ab6c-ca6399bf57ce"
+      }
+    ],
     "player_prefab": {
-      "__uuid__": "1ac8b55f-ad9b-4fc4-b0d0-c3a5534c90a5"
+      "__uuid__": "e2bfadbe-9f50-4a79-b8eb-886d5e72ceef"
     },
     "_id": "afzUrkWCNLMIz8PO2IeENe"
   },

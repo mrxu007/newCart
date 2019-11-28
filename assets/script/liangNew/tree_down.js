@@ -32,7 +32,9 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.node.zIndex = 100;
         this.speed = 560;
+        
     },
 
     start () {

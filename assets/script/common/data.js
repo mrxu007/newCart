@@ -74,8 +74,6 @@ cc.Class({
         }
         console.log(gData);
         return gData;
-
-
     },
     reload: function () {
         cc.sys.localStorage.removeItem('data');
