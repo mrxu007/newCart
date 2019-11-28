@@ -19,7 +19,7 @@ cc.Class({
         if(gDataCtl.getTaskGold() <= 0)return;
         gameCtl.createGoldAnim(
             this.node.getPosition(),
-            cc.v3(topPos.x,topPos.y+100),
+            cc.v3(topPos.x,topPos.y),
             300,
             20,
             gDataCtl.getTaskGold(),
