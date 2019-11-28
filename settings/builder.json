@@ -18,9 +18,19 @@
   "excludeScenes": [],
   "fb-instant-games": {},
   "includeSDKBox": false,
+<<<<<<< HEAD
+<<<<<<< HEAD
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
+  "md5Cache": false,
+=======
+  "inlineSpriteFrames": false,
+=======
+  "inlineSpriteFrames": true,
+>>>>>>> master
+  "inlineSpriteFrames_native": true,
   "md5Cache": true,
+>>>>>>> master
   "mergeStartScene": false,
   "optimizeHotUpdate": false,
   "orientation": {
@@ -35,16 +45,37 @@
     "orientation": "portrait",
     "zip": false
   },
+<<<<<<< HEAD
+<<<<<<< HEAD
+  "startScene": "87f725bd-58e9-46ca-874f-83f74f6f4286",
+=======
+  "startScene": "5db6ec9a-9e49-4ec8-8aeb-c249f5797755",
+>>>>>>> master
+  "title": "newCart",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "",
+<<<<<<< HEAD
+    "appid": "wx6ac3f5090a6b99c5",
+=======
+    "appid": "wx3e868572050f0d77 ",
+>>>>>>> master
+=======
   "startScene": "72f1a797-6d74-47be-b21b-9b40a61cf484",
   "title": "newCart",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "https://blog.jsone.xyz/testCart",
     "appid": "wx3e868572050f0d77",
+>>>>>>> master
     "orientation": "portrait",
     "separate_engine": false,
     "subContext": ""
   },
+<<<<<<< HEAD
+  "xxteaKey": "67b598d0-7fb6-46",
+=======
   "xxteaKey": "eb6414b0-88a3-46",
+>>>>>>> master
   "zipCompressJs": true
 }
