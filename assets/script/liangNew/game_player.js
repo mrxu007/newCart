@@ -34,12 +34,17 @@ cc.Class({
         fail_alert_prefab: {
             default: null,
             type: cc.Prefab,
-        }
+        },
+        get_gold_clip: {
+            default: null,
+            type: cc.AudioClip,
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.node.zIndex = 60;
         this.touch = cc.find('Canvas/game_page/touch');
         //获取子节点anim
         this.anim = this.node.getChildByName('anim');
@@ -62,6 +67,8 @@ cc.Class({
 
     onCollisionEnter: function (other, self) {
         if(other.node.group == 'tree'){
+            this.node.group = 'default';
+            this.node.getComponent(cc.AudioSource).play();
             this.anim.getComponent(cc.Animation).play(0);
             //给game_page表现分赋值
             this.node.parent.getComponent('game_page').score = this.score;
@@ -74,6 +81,7 @@ cc.Class({
         } else if(other.node.group == 'money') {
             this.node.parent.getComponent('game_page').add_gold_score();
             this.score += 50;
+            cc.audioEngine.playEffect(this.get_gold_clip);
         }
         
         

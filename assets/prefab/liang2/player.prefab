@@ -232,6 +232,9 @@
     "fail_alert_prefab": {
       "__uuid__": "af494a94-454a-43e0-ae1b-b987165ab0c8"
     },
+    "get_gold_clip": {
+      "__uuid__": "ffbf362d-1688-47b6-a08e-8b52fcaecf61"
+    },
     "_id": ""
   },
   {
