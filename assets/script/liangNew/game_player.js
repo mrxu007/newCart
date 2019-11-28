@@ -53,7 +53,7 @@ cc.Class({
 
     //设置皮肤
     _set_player_skin: function () {
-        this.anim.getComponent(cc.Sprite).spriteFrame = this.player_skin[1];
+        this.anim.getComponent(cc.Sprite).spriteFrame = this.player_skin[3];
     },
 
     onCollisionEnter: function (other, self) {
