@@ -191,11 +191,21 @@
     },
     "_enabled": true,
     "player_skin": [
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        "__uuid__": "dd76a5b5-a300-497c-86df-a9b81d179054"
+      },
+      {
+        "__uuid__": "4fd87c71-7b2d-4082-8be1-72574bd88f43"
+      },
+      {
+        "__uuid__": "5e1fe647-7b9a-45e2-b78f-407339d7af54"
+      },
+      {
+        "__uuid__": "1eb7adb7-34e0-476c-a3b0-52935fb7b7eb"
+      },
+      {
+        "__uuid__": "d70c4335-6b19-4bbc-ac2b-8bf1bf480db2"
+      }
     ],
     "_id": ""
   },
