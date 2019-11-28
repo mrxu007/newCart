@@ -6,10 +6,10 @@
     ],
     [
       false,
-      true,
+      false,
       null,
       true,
-      true
+      false
     ],
     [
       false,
@@ -28,7 +28,7 @@
     ],
     [
       false,
-      true,
+      false,
       true,
       true,
       true
@@ -61,7 +61,7 @@
       false
     ]
   ],
-  "design-resolution-height": 1280,
+  "design-resolution-height": 1000,
   "design-resolution-width": 720,
   "excluded-modules": [
     "ParticleSystem",
@@ -86,7 +86,7 @@
       "enable": false
     }
   },
-  "fit-height": true,
+  "fit-height": false,
   "fit-width": true,
   "group-list": [
     "default",

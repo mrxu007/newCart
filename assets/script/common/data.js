@@ -39,7 +39,7 @@ cc.Class({
                 // console.log('已生成gData.volume数据');
             }
         
-            // console.log(gData);
+            console.log(gData);
             return gData;
 
 

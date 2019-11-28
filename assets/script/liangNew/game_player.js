@@ -1,0 +1,157 @@
+// Learn cc.Class:
+//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
+//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
+// Learn Attribute:
+//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
+//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
+//  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        // foo: {
+        //     // ATTRIBUTES:
+        //     default: null,        // The default value will be used only when the component attaching
+        //                           // to a node for the first time
+        //     type: cc.SpriteFrame, // optional, default is typeof default
+        //     serializable: true,   // optional, default is true
+        // },
+        // bar: {
+        //     get () {
+        //         return this._bar;
+        //     },
+        //     set (value) {
+        //         this._bar = value;
+        //     }
+        // },
+        player_skin: {
+            default: [],
+            type: cc.SpriteFrame,
+        },
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.touch = cc.find('Canvas/game_page/touch');
+        //获取子节点anim
+        this.anim = this.node.getChildByName('anim');
+        this.registerEvent();
+    },
+
+    start () {
+
+    },
+
+    onCollisionEnter: function () {
+        console.log('撞到了');
+        this.node.getComponent(cc.AudioSource).play();
+        this.node.removeFromParent();
+    },
+
+    //注册监听触摸事件
+    registerEvent() {
+        // console.log("启动了触摸事件监听");
+
+        this.touch.on(cc.Node.EventType.TOUCH_START,this.touchStart, this);
+        // this.Touch_view.on(cc.Node.EventType.TOUCH_START, throttle(this.touchStart, 200), this);
+
+        this.touch.on(cc.Node.EventType.TOUCH_END,this.touchEnd, this);
+        
+     
+    },
+
+    //触摸开始
+    touchStart: function (event) {
+        // console.log("触摸开始");
+        var worldPoint = event.getLocation();
+        touchStartX = worldPoint.x;
+        touchStartY = worldPoint.y;
+        // console.log("触摸开始",this.touchStartX);
+    },
+    // //节点外触发
+    // touchCancel: function (event) {
+
+
+
+    // },
+    //节点内触发
+    touchEnd: function (event) {
+
+
+        var cart = this.node.getPosition();
+        var cartX = cart.x;
+        // console.log(cartX);
+        var vector1 = cartX - 186;
+        var vector2 = cartX + 186;
+        // console.log("触摸结束节点内离开了屏幕");
+        var touchEndPoint = event.getLocation();
+        // console.log("离开屏幕",touchEndPoint.x);
+        var endX = touchStartX - touchEndPoint.x;
+        //判定方向
+        if (endX > 0) {
+            // console.log("判定向左");
+            // console.log(endX);
+            if (vector1 <= -195) {
+                vector1 = -186;
+            }
+            this.moveChange('left', vector1);
+
+        } else if (endX < 0) {
+            if (vector2 >= 186) {
+                vector2 = 186;
+            }
+            // console.log("判定向右");
+            // console.log(endX);
+            this.moveChange('right', vector2);
+
+
+        } else {
+            // console.log("一直点击一个地方不会触发滑动哦");
+
+            return;
+
+        }
+    },
+    //左右控制
+    moveChange(direction, vector) {
+        var notMove = false;
+        if (direction == 'left') {
+            
+
+                if(!notMove){
+                    notMove = true;
+                    this.node.stopAllActions();
+                    // console.log(notMove);
+                    var seqLeft = cc.sequence(
+                        cc.moveTo(0.1, cc.v3(vector, -339.762)),
+                        cc.callFunc(function(){
+                            notMove = false;
+                            // console.log(notMove)
+                        }.bind(this)),
+                    );                       
+                    this.node.runAction(seqLeft);
+                }
+        } else {
+            
+            if(!notMove){
+                notMove = true;
+                this.node.stopAllActions();
+                var seqRight = cc.sequence(
+                    cc.moveTo(0.1, cc.v3(vector, -339.762)),
+                    cc.callFunc(function(){
+                        
+                        notMove = false;
+                    }.bind(this)),
+                );                        
+                this.node.runAction(seqRight);
+            }
+        }
+    },
+
+    // update (dt) {},
+});

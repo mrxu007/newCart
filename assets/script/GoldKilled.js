@@ -8,11 +8,23 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.speed = 560;
+    },
 
     start () {
 
     },
 
-    // update (dt) {},
+    onCollision: function () {
+        this.node.getComponent(cc.AudioSource).play();
+        this.node.parent.getComponent('game_page').add_gold_score();
+        this.node.removeFromParent();
+    },
+
+    update (dt) {
+        this.node.y -= this.speed * dt;
+        if(this.node.y < -1600)
+        this.node.removeFromParent();
+    },
 });

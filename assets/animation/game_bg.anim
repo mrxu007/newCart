@@ -1,0 +1,33 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "game_bg",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 5,
+  "sample": 60,
+  "speed": 2.2,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            -640,
+            0
+          ]
+        },
+        {
+          "frame": 5,
+          "value": [
+            0,
+            -1920,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}
