@@ -31,6 +31,10 @@ cc.Class({
             default: [],
             type: cc.SpriteFrame,
         },
+        fail_alert_prefab: {
+            default: null,
+            type: cc.Prefab,
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -59,9 +63,14 @@ cc.Class({
     onCollisionEnter: function (other, self) {
         if(other.node.group == 'tree'){
             this.anim.getComponent(cc.Animation).play(0);
+            //给game_page表现分赋值
+            this.node.parent.getComponent('game_page').score = this.score;
             this.scheduleOnce(function() {
                 this.node.removeFromParent();
             }, 2);
+            var alert = cc.instantiate(this.fail_alert_prefab);
+            this.node.parent.addChild(alert);
+            alert.zIndex = 200;
         } else if(other.node.group == 'money') {
             this.node.parent.getComponent('game_page').add_gold_score();
             this.score += 50;
