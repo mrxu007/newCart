@@ -27,9 +27,10 @@ cc.Class({
         m_RoomSceneUI1: cc.SpriteAtlas,
         m_voice: cc.Sprite, //左侧声音开关按钮
         m_Information: cc.Node, //车辆购买弹窗
+        m_gameStartButton: cc.Button,
 
 
-
+        
 
 
     },
@@ -49,6 +50,25 @@ cc.Class({
 
         this.shopInit();
         this.buttonInit();
+        var cartArry1= ['car01_1', 'car02_2', 'car03_1', 'car04_6', 'car05_1'];
+        var sprite = this.m_MainCartUI[gameApi.getCartSkin()].getSpriteFrame(cartArry1[gameApi.getCartSkin()]);
+        // console.log(sprite);
+        this.m_MainShowCart.spriteFrame = sprite;
+        this.timer = 5;
+        cc.director.preloadScene('GameScene');
+
+        if(gameApi.getButtonStatus() == 0){
+
+            this.m_gameStartButton.interactable = false;
+            this.schedule(function(){
+                this.timer--;
+                // this.m_advert_time.string = this.timer;
+                if(this.timer == 0 ){
+                    this.m_gameStartButton.interactable = true;
+                }
+            },1,4)
+
+        }
        
         
     },
@@ -131,10 +151,10 @@ cc.Class({
         var Information = this.m_Information;
         var cartStatus = gameApi.getCartBuy();
         var shopGold = this.shopGold.getComponent('shopGoldBar');
-        console.log(cartStatus);
+        // console.log(cartStatus);
         for (var i = 0; i < cartStatus.length; i++) {
 
-            if (i == 0) {
+            if (gameApi.getCartSkin() == 0) {
                 childrenArr[0].isChecked = true;
                 childrenArr[0].buy = true;
                 var frame = this.m_shopBackUI.getSpriteFrame('checked');
@@ -169,6 +189,7 @@ cc.Class({
                 var gDataCtlMoney = gDataCtl.GetGold();
                 // console.log(gDataCtlMoney);
                 if (gDataCtlMoney < money) {
+
                     js1.setLabel('还差' + (money - gDataCtlMoney) + '金币才可解锁');
                     // console.log( );
 
@@ -205,7 +226,10 @@ cc.Class({
         // var Information = this.m_Information;
         // console.log(childrenArr);
         // console.log(childrenArr);
-        childrenArr.forEach(function (item) {
+        var frameInit = shopUI.getSpriteFrame('checked');
+          childrenArr[gameApi.getCartSkin()].getComponent(cc.Sprite).spriteFrame = frameInit;
+
+            childrenArr.forEach(function (item) {
 
             childrenArr[item.id].on(cc.Node.EventType.TOUCH_END, function (event) {
 
@@ -224,8 +248,9 @@ cc.Class({
                         var frame1 = shopUI.getSpriteFrame('checked');
                         childrenArr[item1.id].getComponent(cc.Sprite).spriteFrame = frame1;
                         if (cartStatus[item1.id].status == true) {
+                            gameApi.setCartSkin(item1.id);
                             childrenArr[item.id].children[0].active = false;
-                            var sprite = MainCartUI[item1.id].getSpriteFrame(cartArry[item1.id]);
+                            var sprite = MainCartUI[item1.id].getSpriteFrame(cartArry[gameApi.getCartSkin()]);
                             // console.log(sprite);
                             MainShowCart.spriteFrame = sprite;
 
@@ -236,7 +261,7 @@ cc.Class({
                             childrenArr[0].getComponent(cc.Sprite).spriteFrame = frame3;
 
 
-                            var sprite = MainCartUI[0].getSpriteFrame(cartArry[0]);
+                            var sprite = MainCartUI[0].getSpriteFrame(cartArry[gameApi.getCartSkin()]);
                             // console.log(sprite);
                             MainShowCart.spriteFrame = sprite;
                             Information.active = true; //显示购买车辆弹窗
@@ -274,6 +299,7 @@ cc.Class({
 
         cc.director.loadScene("GameScene");
         // cc.director.resume();
+        gameApi.setButtonStatus(1);
         cc.audioEngine.pauseAll();
     },
     // //进入场景排行榜
@@ -320,9 +346,9 @@ cc.Class({
             gDataCtl.del();
 
 
-        } else if (data == "重载数据") {
-            gDataCtl.setGoldAddTime(20);
-            gDataCtl.setAwardGold(20);
+        } else if (data == "添加金币") {
+
+            gDataCtl.AddGold(10000);
 
         } else if (data == "移出") {
             for (var i = 0; i < this.m_ClassArray.length; i++) {
@@ -352,6 +378,7 @@ cc.Class({
      * 
      */
     createGoldAnim: function (srcPos, dstPos, radius, goldCount, addGold, callback) {
+        console.log(dstPos);
         var array = this.getPoint(radius, srcPos.x, srcPos.y, goldCount);
         var nodeArray = new Array();
         for (var i = 0; i < array.length; i++) {
@@ -440,6 +467,7 @@ cc.Class({
 
         // console.log(cc.audioEngine.getState(gDataCtl.getPlayRoomMusicId()));
         // if(gDataCtl.getPlayRoomMusicId > 0){
+       
         cc.loader.loadRes('assets/Main', cc.AudioClip, function (err, clip) {
             var audioID = cc.audioEngine.play(clip, true, volume);
             gDataCtl.setPlayRoomMusicId(audioID);
@@ -478,7 +506,7 @@ cc.Class({
             this.m_voice.getComponent(cc.Sprite).spriteFrame = frame1;
         } else {
             status = true;
-            cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), gDataCtl.setVle(1));
+            cc.audioEngine.setVolume(gDataCtl.getPlayRoomMusicId(), gDataCtl.setVle(0.7));
             // console.log('开启音量：'+volume);
             gDataCtl.setRoomVoiceStatus(status);
             var frame2 = this.m_RoomSceneUI1.getSpriteFrame('icon_voice_open@1x');

@@ -103,6 +103,11 @@ cc.Class({
         return cc.v2(pos.x, pos.y);
     },
 
+    //关闭场景音乐
+    stop_audio: function () {
+        this.node.getComponent(cc.AudioSource).stop();
+    },
+
     //生成车
     car_create: function () {
         var player = cc.instantiate(this.player_prefab);

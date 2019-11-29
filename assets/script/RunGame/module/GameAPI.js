@@ -23,7 +23,7 @@ gameApi.prototype.setCartBuy  = function(cartInfo)
 {
     return gDataCtl.setCartStatus(cartInfo);
 }
-//游戏初始化加载商城车辆状态
+//初始化加载商城车辆状态
 gameApi.prototype.getCartBuy = function()
 {
      return gDataCtl.getCartStatus();
@@ -33,5 +33,37 @@ gameApi.prototype.setGold2 = function(gold)
 {
     gDataCtl.AddGold2(gold);
 }
+//游戏皮肤id设置
+gameApi.prototype.setCartSkin = function(id){
+  
+    gDataCtl.setCartSkinId(id);
+}
+//读取车子皮肤id
+gameApi.prototype.getCartSkin = function(){
+  
+    return gDataCtl.getCartSkinId();
+}
+//设置新手按钮状态
+gameApi.prototype.setButtonStatus = function(status){
+    
+    gDataCtl.setGameStartButtonStatus(status);
+}
+//读取新手按钮状态
+gameApi.prototype.getButtonStatus = function(){
+    
+    return gDataCtl.getGameStartButtonStatus();
+}
+//设置游戏积分数据
+gameApi.prototype.setGameScore1 = function(score){
+
+    gDataCtl.setGameScore(score);
+}
+//读取游戏积分数据
+gameApi.prototype.getGameScore1 = function(){
+
+    return gDataCtl.getGameScore();
+}
+
+//游戏皮肤id获取
 //暴露的外部接口调用
 module.exports = new gameApi();

@@ -28,7 +28,7 @@ cc.Class({
     },
     //基础数据
     simpleData: function () {
-        console.log('已注入新的数据项');
+        // console.log('已注入新的数据项');
         if (gData.BuyCartStatus == undefined) {
             gData.BuyCartStatus = [{
                     id: 0,
@@ -54,8 +54,25 @@ cc.Class({
         }
         if (gData.volume == undefined) {
 
-            gData.volume = 1;
-            // console.log('已生成gData.volume数据');
+            gData.volume = 0.7;
+          
+        }
+        if (gData.DataStatus == undefined) {
+
+            gData.DataStatus = 1;
+            
+        }
+        if(gData.CartSkinId == undefined){
+
+            gData.CartSkinId = 0;
+        }
+        if(gData.gameStartButtonStatus == undefined)
+        {
+            gData.gameStartButtonStatus = 0;
+        }
+        if(gData.gameScore == undefined){
+
+            gData.gameScore = 0
         }
     },
     load: function () {
@@ -64,14 +81,7 @@ cc.Class({
         if (gData == null) {
             gData = {};
         }
-        // this.simpleData();
-        if (gData.DataStatus == undefined) {
-            gData.DataStatus = 1;
-            this.simpleData();
-            
-        }else{
-            console.log('已经初始化后就不会再初始化了');
-        }
+        this.simpleData();
         console.log(gData);
         return gData;
     },
@@ -94,6 +104,9 @@ cc.Class({
             { id: 4, status: false},
         
         ];
+        gData.gameStartButtonStatus = 0;
+
+        gData.CartSkinId = 0;
 
         console.log('数据已清空');
         this.save();
@@ -198,7 +211,7 @@ cc.Class({
     setVle: function (vl) {
         if (gData.volume = null) {
             // console.log('data文件:自动生成gData.volume变量');
-            gData.volume = 1;
+            gData.volume = 0.7;
         } else {
             gData.volume = vl;
         }
@@ -224,13 +237,15 @@ cc.Class({
         // console.log('data文件:获取---音频的id:'+ gData.RoomMusicId);
         return gData.RoomMusicId;
     },
+    //设置车的购买状态
     setCartStatus: function (cartInfoId) {
         // console.log(gData.BuyCartStatus[cartInfo].status);
         gData.BuyCartStatus[cartInfoId].status = true;
-        console.log(gData);
+        // console.log(gData);
         this.save();
         // gData.BuyCartStatus[cartInfoId].status;
     },
+    //获取购买车的状态
     getCartStatus: function () {
         // console.log(gData.BuyCartStatus);
         return gData.BuyCartStatus;
@@ -239,6 +254,44 @@ cc.Class({
     // {
     //     gData.BuyCartStatus[i]
     // }
+    //设置游戏里面车的皮肤
+    setCartSkinId: function(id){
+
+        gData.CartSkinId = id;
+        console.log('当前车辆皮肤id为'+ gData.CartSkinId);
+        this.save(); 
+    },
+    //获取游戏里面车的皮肤
+    
+    getCartSkinId: function(){
+
+        return gData.CartSkinId;
+    },
+    //设置初始按钮状态
+    setGameStartButtonStatus:function(status){
+
+        gData.gameStartButtonStatus = status;
+        console.log('当前车辆初始按钮的状态为'+ gData.gameStartButtonStatus);
+        this.save();
+    },
+    //获取初始按钮状态
+    getGameStartButtonStatus:function(){
+
+        return gData.gameStartButtonStatus;
+    },
+    //保存游戏里的的积分
+    setGameScore: function(score){
+
+        gData.gameScore = score;
+        console.log('保存游戏积分成功');
+        this.save();
+    },
+    getGameScore: function(){
+
+        return gData.gameScore
+    },
+    //读取游戏里的积分
+    
 
     start() {
 

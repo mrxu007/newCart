@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+var gameApi = require('GameAPI');
 cc.Class({
     extends: cc.Component,
 
@@ -39,6 +39,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+       
         this.m_advert_close.active = false;
         this.m_advert_time.string = '5';
         this.timer = 5;
@@ -48,6 +49,15 @@ cc.Class({
         this.gold_num.string = this.node.parent.getComponent('game_page').goldScore;
         this.gold_num_advice.string = this.node.parent.getComponent('game_page').goldScore * 10;
         this.score.string = this.node.parent.getComponent('game_page').score;
+        cc.director.preloadScene('RoomScene2');
+
+        var gameScore = parseInt(this.score.string);
+
+        if(gameScore > gameApi.getGameScore1()){
+
+            gameApi.setGameScore1(gameScore);
+        }
+
         
     },
 
@@ -61,12 +71,22 @@ cc.Class({
             }
         },1,4)
     },
-
-    closeAdvertToRoomscene2:function(){
-        this.m_advertisement.active = false;
-        this.m_gameAlert.active = false;
+    changeToRoomscene2: function(){
+        var goldNomle =  parseInt(this.gold_num.string);
+        console.log('获取到的正常金币为'+goldNomle+typeof goldNomle);
+        gameApi.setGold(goldNomle);
         cc.director.loadScene("RoomScene2");
     },
+
+    closeAdvertToRoomscene2:function(){
+        var goldTen =  parseInt( this.gold_num_advice.string);
+        console.log('获取到的广告金币为'+goldTen+typeof goldTen);
+        gameApi.setGold(goldTen);
+        this.m_advertisement.active = false;
+        this.m_gameAlert.active = false;    
+        cc.director.loadScene("RoomScene2");
+    },
+   
     btShowAdvert : function () {
         this.m_advertisement.active = true;
 

@@ -13,13 +13,13 @@ cc.Class({
     //按钮调用创建金币
     onClickGet:function(target,data) {
         var topPos = this.m_topMenu.getPosition();
-        // console.log("调用金币时坐标"+this.node.getPosition());
+        // console.log("飞翔行金币坐标"+topPos);
         // console.log("获取金币");
         // console.log(this.node.getPosition());
         if(gDataCtl.getTaskGold() <= 0)return;
         gameCtl.createGoldAnim(
             this.node.getPosition(),
-            cc.v3(topPos.x,topPos.y),
+            cc.v3(topPos.x,topPos.y+300),
             300,
             20,
             gDataCtl.getTaskGold(),

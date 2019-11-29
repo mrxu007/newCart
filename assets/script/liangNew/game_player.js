@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+var gameApi = require('GameAPI');
 cc.Class({
     extends: cc.Component,
 
@@ -62,7 +62,7 @@ cc.Class({
 
     //设置皮肤
     _set_player_skin: function () {
-        this.anim.getComponent(cc.Sprite).spriteFrame = this.player_skin[3];
+        this.anim.getComponent(cc.Sprite).spriteFrame = this.player_skin[gameApi.getCartSkin()];
     },
 
     onCollisionEnter: function (other, self) {
@@ -78,13 +78,15 @@ cc.Class({
             var alert = cc.instantiate(this.fail_alert_prefab);
             this.node.parent.addChild(alert);
             alert.zIndex = 200;
+            //cc.audioEngine.stopAll();
+            this.node.parent.getComponent('game_page').stop_audio();
         } else if(other.node.group == 'money') {
             this.node.parent.getComponent('game_page').add_gold_score();
             this.score += 50;
             // console.log('测试');
             cc.audioEngine.playEffect(this.get_gold_clip);
         }
-        
+       
         
     },
 
