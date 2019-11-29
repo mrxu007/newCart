@@ -165,7 +165,11 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
+<<<<<<< HEAD
       "z": 285.11023669343
+=======
+      "z": 525.6774200971543
+>>>>>>> liang-dev
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -2601,6 +2605,7 @@
       },
       {
         "__id__": 62
+        "__id__": 60
       }
     ],
     "_prefab": null,
@@ -2694,6 +2699,9 @@
       },
       {
         "__id__": 61
+      },
+      {
+        "__id__": 62
       }
     ],
     "_N$interactable": true,
@@ -2783,6 +2791,12 @@
       "__uuid__": "32b7a300-e880-4085-85ef-a3b053e3c003"
     },
     "_id": "67MUdJ0odEeoDFqzBnxCaX"
+      "__id__": 17
+    },
+    "component": "",
+    "_componentId": "edc522qBclMXLUse1rX4yJo",
+    "handler": "openTurn",
+    "customEventData": ""
   },
   {
     "__type__": "cc.Widget",
@@ -2812,6 +2826,10 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_id": "149Rtp5bhGnbmE6kVihTtO"
+    "turn_page_prefab": {
+      "__uuid__": "7c4d6c22-6e6b-42dc-b828-20ef3546562a"
+    },
+    "_id": "112anZRxRO5rvhQyhKvOQI"
   },
   {
     "__type__": "cc.Node",

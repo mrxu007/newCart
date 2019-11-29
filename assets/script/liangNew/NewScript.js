@@ -12,7 +12,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
         // foo: {
         //     // ATTRIBUTES:
         //     default: null,        // The default value will be used only when the component attaching
@@ -32,25 +31,11 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        this.play();
-    },
+    // onLoad () {},
 
     start () {
-        
 
     },
-    play: function() {
-        var seq = cc.sequence(
-            cc.scaleTo(0.5,1,1),
-            cc.scaleTo(0.5,0.8,0.8),
-            cc.rotateTo(0.5,-15),
-            cc.rotateTo(0.5,0),
-            cc.delayTime(1),
-        );
-        this.node.runAction(cc.repeatForever(seq));
-
-    }
 
     // update (dt) {},
 });
