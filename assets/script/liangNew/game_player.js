@@ -81,6 +81,7 @@ cc.Class({
         } else if(other.node.group == 'money') {
             this.node.parent.getComponent('game_page').add_gold_score();
             this.score += 50;
+            // console.log('测试');
             cc.audioEngine.playEffect(this.get_gold_clip);
         }
         
