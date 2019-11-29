@@ -44,8 +44,10 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        //初始化金币得分数
+        //初始化金币得数
         this.goldScore = 0;
+        //初始化表现分数
+        this.score = 0;
         this.node.getComponent(cc.AudioSource).play();
     },
 
@@ -67,13 +69,13 @@ cc.Class({
     onEnable () {
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        manager.enabledDebugDraw = true;
+        //manager.enabledDebugDraw = true;
     },
 
     onDisable () {
         var manager = cc.director.getCollisionManager();
         manager.enabled = false;
-        manager.enabledDebugDraw = false;
+        //manager.enabledDebugDraw = false;
     },
 
     //随机生成树组

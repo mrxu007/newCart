@@ -229,6 +229,9 @@
         "__uuid__": "d70c4335-6b19-4bbc-ac2b-8bf1bf480db2"
       }
     ],
+    "fail_alert_prefab": {
+      "__uuid__": "af494a94-454a-43e0-ae1b-b987165ab0c8"
+    },
     "_id": ""
   },
   {

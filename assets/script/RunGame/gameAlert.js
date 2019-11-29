@@ -31,6 +31,9 @@ cc.Class({
         m_advert_close: cc.Node,
         m_advert_time: cc.Label,
         m_gameAlert: cc.Node,
+        gold_num: cc.Label,
+        gold_num_advice: cc.Label,
+        score: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -39,7 +42,17 @@ cc.Class({
         this.m_advert_close.active = false;
         this.m_advert_time.string = '5';
         this.timer = 5;
+        //广告弹出
+        this._advice_set();
+        //获取金币数
+        this.gold_num.string = this.node.parent.getComponent('game_page').goldScore;
+        this.gold_num_advice.string = this.node.parent.getComponent('game_page').goldScore * 10;
+        this.score.string = this.node.parent.getComponent('game_page').score;
+        
+    },
 
+    _advice_set: function () {
+        
         this.schedule(function(){
             this.timer--;
             this.m_advert_time.string = this.timer;
@@ -48,6 +61,7 @@ cc.Class({
             }
         },1,4)
     },
+
     closeAdvertToRoomscene2:function(){
         this.m_advertisement.active = false;
         this.m_gameAlert.active = false;
