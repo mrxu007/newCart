@@ -264,25 +264,25 @@ cc.Class({
 
     },
     //进入游戏
-    ChangeToGame: function () {
+    // ChangeToGame: function () {
 
-        cc.director.loadScene("GameScene4");
-        // cc.director.resume();
-        cc.audioEngine.pauseAll();
-    },
+    //     cc.director.loadScene("GameScene4");
+    //     // cc.director.resume();
+    //     cc.audioEngine.pauseAll();
+    // },
     ChangeToGame2: function () {
 
-        cc.director.loadScene("GameScene4");
+        cc.director.loadScene("GameScene");
         // cc.director.resume();
         cc.audioEngine.pauseAll();
     },
     //进入场景排行榜
-    ChangeToLeaderBorder: function () {
+    // ChangeToLeaderBorder: function () {
 
-        cc.director.loadScene("LeaderBorder");
-        // cc.audioEngine.pause(gDataCtl.getPlayRoomMusicId());
-        cc.audioEngine.pauseAll();
-    },
+    //     cc.director.loadScene("LeaderBorder");
+    //     // cc.audioEngine.pause(gDataCtl.getPlayRoomMusicId());
+    //     cc.audioEngine.pauseAll();
+    // },
     //切换ShopBorder
     openShopBorder: function (event, data) {
         // console.log("触发了转向"+data);
