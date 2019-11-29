@@ -12,7 +12,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-      
+        turn_page_prefab: {
+            default: null,
+            type: cc.Prefab,
+        },
 
     },
 
@@ -33,6 +36,15 @@ cc.Class({
         cc.loader.loadRes('assets/button', cc.AudioClip, function (err, clip) {
             var audioID = cc.audioEngine.play(clip, false);
         });
+       
+
+    },
+    openTurn:function(){
+
+         //生成转盘
+         var turn_page = cc.instantiate(this.turn_page_prefab);
+         turn_page.parent = cc.find('Canvas');
+
     },
 
     start () {
