@@ -276,7 +276,7 @@ cc.Class({
         // cc.director.resume();
         cc.audioEngine.pauseAll();
     },
-    //进入场景排行榜
+    // //进入场景排行榜
     // ChangeToLeaderBorder: function () {
 
     //     cc.director.loadScene("LeaderBorder");
