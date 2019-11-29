@@ -19,9 +19,9 @@ cc.Class({
     },
 
     onCollisionEnter: function () {
-        this.node.getComponent(cc.AudioSource).play();
-        
+        //this.node.getComponent(cc.AudioSource).play();
         this.node.removeFromParent();
+        
     },
 
     update (dt) {
