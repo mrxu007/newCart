@@ -27,9 +27,9 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        m_advertisement: cc.Node,
-        m_advert_close: cc.Node,
-        m_advert_time: cc.Label,
+        m_advertisement: cc.Prefab, //广告弹窗
+        // m_advert_close: cc.Node,
+        // m_advert_time: cc.Label,
         m_gameAlert: cc.Node,
         gold_num: cc.Label,
         gold_num_advice: cc.Label,
@@ -40,11 +40,8 @@ cc.Class({
 
     onLoad () {
        
-        this.m_advert_close.active = false;
-        this.m_advert_time.string = '5';
-        this.timer = 5;
-        //广告弹出
-        this._advice_set();
+    
+     
         //获取金币数
         this.gold_num.string = this.node.parent.getComponent('game_page').goldScore;
         this.gold_num_advice.string = this.node.parent.getComponent('game_page').goldScore * 10;
@@ -61,16 +58,7 @@ cc.Class({
         
     },
 
-    _advice_set: function () {
-        
-        this.schedule(function(){
-            this.timer--;
-            this.m_advert_time.string = this.timer;
-            if(this.timer == 0 ){
-                this.m_advert_close.active = true;
-            }
-        },1,4)
-    },
+  
     changeToRoomscene2: function(){
         var goldNomle =  parseInt(this.gold_num.string);
         console.log('获取到的正常金币为'+goldNomle+typeof goldNomle);
@@ -78,18 +66,16 @@ cc.Class({
         cc.director.loadScene("RoomScene2");
     },
 
-    closeAdvertToRoomscene2:function(){
-        var goldTen =  parseInt( this.gold_num_advice.string);
-        console.log('获取到的广告金币为'+goldTen+typeof goldTen);
-        gameApi.setGold(goldTen);
-        this.m_advertisement.active = false;
-        this.m_gameAlert.active = false;    
-        cc.director.loadScene("RoomScene2");
-    },
+
    
     btShowAdvert : function () {
-        this.m_advertisement.active = true;
-
+        var goldTen = parseInt(this.gold_num_advice.string);
+        console.log('获取到的广告金币为' + goldTen + typeof goldTen);
+        gameApi.setGold(goldTen);
+        
+        var ad= cc.instantiate(this.m_advertisement);
+        console.log(ad);
+        cc.find('Canvas').addChild(ad);
       
     },
     

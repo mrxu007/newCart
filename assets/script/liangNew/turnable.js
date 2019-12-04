@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+var gameApi = require('GameAPI');
 cc.Class({
     extends: cc.Component,
 
@@ -110,7 +110,8 @@ cc.Class({
                 this.gold_num = 200;
                 break;
         }
-        
+        var MainGoldBar = cc.find('Canvas/MainViewAll/MainView/MenuAll/TopMenu/Back/icon_Gold coin@1x/New Label');
+        console.log(MainGoldBar.getComponent(cc.Label).string);
         var rotation = cc.rotateTo(3,x + 360*5).easing(cc.easeSineInOut());
         var finished = cc.callFunc(() => {
             this.choice_btn.getComponent(cc.Button).interactable = true;
@@ -118,10 +119,18 @@ cc.Class({
         }, this);
         var get_gold = cc.callFunc(() => {
             this.gold_label.active = true;
-            if(this.gold_num != 0)
-            this.gold_label.string = '获得'+this.gold_num + '金币';
-            else
-            this.gold_label.string = '再接再厉';
+            if(this.gold_num != 0){
+               this.gold_label.string = '获得'+this.gold_num + '金币';
+               var goldTen = parseInt(this.gold_num);
+                console.log('获得大转盘金币为' + goldTen);
+                gameApi.setGold(goldTen);
+                MainGoldBar.getComponent(cc.Label).string = '' + tranNumber( gDataCtl.GetGold(),1);
+                 
+            }
+            else{
+                this.gold_label.string = '再接再厉';
+            }
+            
         }, this);
         var myAction = cc.sequence(rotation, finished, get_gold);
         this.turn_node.runAction(myAction);
